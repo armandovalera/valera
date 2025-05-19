@@ -1,0 +1,80 @@
+*{
+    margin: 0; 
+    padding: 0;
+}
+
+html{
+    background-color: gainsboro;
+}
+
+h1{
+    text-align: center;
+    text-transform: uppercase
+}
+
+p{
+    text-align: center;
+    color:gray;
+    font-size: x-large;
+}
+
+h1, p{
+    margin: 15px;
+}
+
+form{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.contenedor{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input{
+    width: 600px;
+    height: 30px;
+}
+
+label{
+    margin-bottom: 20px;
+}
+
+input{
+    margin-bottom: 30px;
+    border-radius: 30px;
+}
+
+hr{
+    margin-bottom: 50px;
+}
+
+button{
+    margin-top: 30px;
+    width: 120px;
+    background-color: black;
+    color:white;    
+    padding: 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+}
+
+button:hover{
+    background-color: gray;
+}
+
+.mensaje{
+    width: 600px;
+    height: 100px;
+    border-radius: 30px;
+}
+
+.borrar{
+    background-color: black;
+    color:white;
+    width: 120px;
+    height: 40px;
+    text-transform: uppercase;
+}
