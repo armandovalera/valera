@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación con Claude</title>
+  <meta name="description" content="Potencia tu desarrollo de software con Claude IA: asistencia experta en programación, debugging, arquitectura y mejores prácticas.">
+  <style>
+    :root {
+      --color-primary: #FF6B35;
+      --color-secondary: #b09c09;
+      --color-accent: #FFA366;
+      --color-dark: #2C2C2C;
+      --color-gray: #4A4A4A;
+      --color-light-gray: #F8F9FA;
+      --color-white: #fff;
+      --color-text: #2C2C2C;
+      --color-earth1: #8B4513; /* Marrón */
+      --color-earth2: #D2B48C; /* Tan/Beige */
+      --color-earth3: #DEB887; /* Burlywood */
+      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --border-radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --shadow-light: 0 2px 10px rgba(255, 107, 53, 0.1);
+      --shadow-medium: 0 4px 20px rgba(255, 107, 53, 0.15);
+      --shadow-heavy: 0 8px 30px rgba(255, 107, 53, 0.2);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-main);
+      background: var(--color-white);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    .main-header {
+      background: var(--color-white);
+      box-shadow: var(--shadow-light);
+      position: fixed;
+      top: 0; width: 100%; z-index: 1000;
+      transition: var(--transition);
+    }
+    .nav {
+      display: flex; justify-content: space-between; align-items: center;
+      max-width: 1200px; margin: 0 auto; padding: 1rem 2rem;
+    }
+    .nav__logo {
+      font-size: 1.8rem; font-weight: 700; color: var(--color-primary);
+      text-decoration: none; transition: var(--transition);
+    }
+    .nav__logo:hover { color: var(--color-secondary); transform: scale(1.05);}
+    .nav__list { list-style: none; display: flex; gap: 2rem; align-items: center;}
+    .nav__link {
+      color: var(--color-gray); text-decoration: none; font-weight: 500;
+      transition: var(--transition); position: relative;
+    }
+    .nav__link:hover { color: var(--color-primary);}
+    .nav__link:after {
+      content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
+      background: var(--color-primary); transition: var(--transition);
+    }
+    .nav__link:hover:after { width: 100%; }
+    .hero {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 50%, var(--color-accent) 100%);
+      color: var(--color-white); padding: 8rem 2rem 6rem 2rem; margin-top: 80px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .hero__content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto;}
+    .hero__title { font-size: 3.2rem; font-weight: 700; margin-bottom: 1.2rem; }
+    .hero__subtitle { font-size: 1.4rem; margin-bottom: 2rem; opacity: 0.95;}
+    .hero__description { font-size: 1.1rem; margin-bottom: 3rem; line-height: 1.8;}
+    .btn {
+      display: inline-block; padding: 1rem 2.5rem; border-radius: var(--border-radius);
+      font-size: 1.1rem; font-weight: 600; text-decoration: none; transition: var(--transition);
+      cursor: pointer; border: none; position: relative; overflow: hidden; margin: 0.5rem;
+    }
+    .btn--primary {
+      background: var(--color-white); color: var(--color-primary); box-shadow: var(--shadow-medium);
+    }
+    .btn--primary:hover { transform: translateY(-3px); box-shadow: var(--shadow-heavy); color: var(--color-secondary);}
+    .btn--secondary {
+      background: transparent; color: var(--color-white); border: 2px solid var(--color-white);
+    }
+    .btn--secondary:hover { background: var(--color-white); color: var(--color-primary); transform: translateY(-3px);}
+    .section {
+      padding: 5rem 2rem; max-width: 1200px; margin: 0 auto;
+    }
+    .section--dark { 
+      background: var(--color-light-gray);
+    }
+    .section--gradient-orange {
+      background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-earth2) 100%);
+      color: var(--color-white);
+      position: relative;
+      overflow: hidden;
+    }
+    .section--gradient-earth {
+      background: linear-gradient(135deg, var(--color-earth1) 0%, var(--color-earth3) 100%);
+      color: var(--color-white);
+      position: relative;
+      overflow: hidden;
+    }
+    .section--gradient-orange .section-title,
+    .section--gradient-earth .section-title {
+      color: var(--color-white);
+    }
+    .section--gradient-orange .section-subtitle,
+    .section--gradient-earth .section-subtitle {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .section--gradient-orange .feature-card,
+    .section--gradient-earth .feature-card {
+      background: rgba(255, 255, 255, 0.95);
+    }
+    .section-title {
+      font-size: 2.5rem; font-weight: 700; color: var(--color-dark); margin-bottom: 1rem; text-align: center;
+    }
+    .section-subtitle {
+      font-size: 1.2rem; color: var(--color-gray); text-align: center; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;
+    }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;
+    }
+    .feature-card {
+      background: var(--color-white); padding: 2.5rem; border-radius: var(--border-radius);
+      box-shadow: var(--shadow-light); transition: var(--transition); text-align: center;
+      border: 1px solid rgba(255, 107, 53, 0.1);
+    }
+    .feature-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-medium); border-color: var(--color-accent);}
+    .feature-icon {
+      width: 60px; height: 60px; background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto;
+      font-size: 2rem; color: var(--color-white);
+    }
+    .section--gradient-orange .feature-icon {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-earth2));
+    }
+    .section--gradient-earth .feature-icon {
+      background: linear-gradient(135deg, var(--color-earth1), var(--color-secondary));
+    }
+    .feature-title { font-size: 1.4rem; font-weight: 600; color: var(--color-dark); margin-bottom: 1rem;}
+    .feature-text { color: var(--color-gray); line-height: 1.6;}
+    .main-footer {
+      background: var(--color-dark); color: var(--color-white); padding: 3rem 2rem 2rem 2rem; text-align: center;
+    }
+    .footer-content { max-width: 1200px; margin: 0 auto;}
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;}
+    .footer-link { color: var(--color-white); text-decoration: none; transition: var(--transition);}
+    .footer-link:hover { color: var(--color-accent);}
+    .footer-text { opacity: 0.8; font-size: 0.9rem;}
+    @media (max-width: 768px) {
+      .nav { padding: 1rem;}
+      .nav__list { flex-direction: column; gap: 1rem;}
+      .hero { padding: 6rem 1rem 4rem 1rem;}
+      .hero__title { font-size: 2.2rem;}
+      .section { padding: 3rem 1rem;}
+      .features-grid { grid-template-columns: 1fr; gap: 1.5rem;}
+      .footer-links { flex-direction: column; gap: 1rem;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="main-header">
+    <nav class="nav">
+      <a href="claude.html" class="nav__logo">IA Claude</a>
+      <ul class="nav__list">
+        <li><a href="#asistencia" class="nav__link">Asistencia</a></li>
+        <li><a href="#debugging" class="nav__link">Debugging</a></li>
+        <li><a href="#arquitectura" class="nav__link">Arquitectura</a></li>
+        <li><a href="#mejores-practicas" class="nav__link">Mejores Prácticas</a></li>
+        <li><a href="index.html" class="nav__link">Inicio</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__content">
+      <h1 class="hero__title">Programación Experta con Claude IA</h1>
+      <p class="hero__subtitle">Tu copiloto inteligente para el desarrollo de software</p>
+      <p class="hero__description">
+        Descubre cómo Claude IA puede transformar tu flujo de trabajo como desarrollador, brindando asistencia avanzada en cada etapa del ciclo de vida del software.
+      </p>
+      <div>
+        <a href="https://claude.ai" class="btn btn--primary" target="_blank" rel="noopener">Probar Claude</a>
+        <a href="#asistencia" class="btn btn--secondary">Ver Secciones</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="asistencia" class="section fade-in">
+    <h2 class="section-title">Asistencia Completa en Desarrollo de Software</h2>
+    <p class="section-subtitle">
+      Claude IA te acompaña desde la concepción de la idea hasta la entrega del producto final, acelerando cada paso con inteligencia y precisión.
+    </p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">💡</div>
+        <h3 class="feature-title">Generación de Código</h3>
+        <p class="feature-text">
+          Obtén fragmentos de código, funciones completas o soluciones a problemas específicos en múltiples lenguajes, optimizados y listos para usar.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3 class="feature-title">Revisión Colaborativa</h3>
+        <p class="feature-text">
+          Recibe sugerencias inteligentes para mejorar tu código, detectar errores y aplicar patrones de diseño recomendados.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h3 class="feature-title">Documentación Instantánea</h3>
+        <p class="feature-text">
+          Genera documentación técnica clara y precisa a partir de tu código o requerimientos, facilitando la comunicación en tu equipo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="debugging" class="section section--gradient-orange fade-in">
+    <h2 class="section-title">Debugging Inteligente</h2>
+    <p class="section-subtitle">
+      Identifica, comprende y soluciona errores de manera eficiente con el apoyo de Claude IA.
+    </p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🛠️</div>
+        <h3 class="feature-title">Detección de Errores</h3>
+        <p class="feature-text">
+          Analiza tu código y encuentra bugs, vulnerabilidades y cuellos de botella antes de que lleguen a producción.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔎</div>
+        <h3 class="feature-title">Explicaciones Claras</h3>
+        <p class="feature-text">
+          Recibe explicaciones detalladas sobre el origen de los errores y sugerencias para solucionarlos paso a paso.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3 class="feature-title">Optimización Continua</h3>
+        <p class="feature-text">
+          Mejora el rendimiento y la calidad de tu software con recomendaciones automáticas y personalizadas.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="arquitectura" class="section fade-in">
+    <h2 class="section-title">Arquitectura de Software</h2>
+    <p class="section-subtitle">
+      Diseña sistemas robustos y escalables con la guía experta de Claude IA.
+    </p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🏗️</div>
+        <h3 class="feature-title">Diseño de Arquitecturas</h3>
+        <p class="feature-text">
+          Recibe propuestas de arquitecturas modernas, patrones de diseño y diagramas para tus proyectos.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <h3 class="feature-title">Integración de Tecnologías</h3>
+        <p class="feature-text">
+          Asesórate sobre la mejor forma de integrar APIs, bases de datos, servicios en la nube y más.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧩</div>
+        <h3 class="feature-title">Escalabilidad y Mantenimiento</h3>
+        <p class="feature-text">
+          Planifica el crecimiento de tu software y asegura su mantenibilidad a largo plazo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="mejores-practicas" class="section section--gradient-earth fade-in">
+    <h2 class="section-title">Mejores Prácticas de Programación</h2>
+    <p class="section-subtitle">
+      Eleva la calidad de tu código y tus procesos con las recomendaciones de Claude IA.
+    </p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">✅</div>
+        <h3 class="feature-title">Estándares de Código</h3>
+        <p class="feature-text">
+          Aplica convenciones y estándares reconocidos para mantener tu código limpio y profesional.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h3 class="feature-title">Seguridad</h3>
+        <p class="feature-text">
+          Implementa prácticas seguras desde el inicio y protege tus aplicaciones contra amenazas comunes.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <h3 class="feature-title">Automatización</h3>
+        <p class="feature-text">
+          Descubre cómo automatizar pruebas, despliegues y tareas repetitivas para maximizar tu productividad.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="https://claude.ai" class="footer-link" target="_blank" rel="noopener">Claude IA</a>
+        <a href="https://www.anthropic.com" class="footer-link" target="_blank" rel="noopener">Anthropic</a>
+        <a href="https://docs.anthropic.com" class="footer-link" target="_blank" rel="noopener">Documentación</a>
+        <a href="index.html" class="footer-link" target="_blank" rel="noopener">Inicio</a>
+      </div>
+      <p class="footer-text">
+        &copy; 2025 @avalera. Asistencia experta para desarrolladores.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
