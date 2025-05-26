@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Modelos de Gemini y Comparativa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #fff;
+      background: linear-gradient(120deg, #6a82fb, #fc5c7d, #43cea2, #185a9d);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease-in-out infinite;
+    }
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    .container {
+      width: 92%;
+      max-width: 1200px;
+      margin: 60px auto;
+      background: rgba(255, 255, 255, 0.85); color: #222;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px 0 rgba(31, 41, 55, 0.25);
+      padding: 40px 32px;
+      backdrop-filter: blur(4px);
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 2.6rem;
+      margin-bottom: 0.5em;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px #0002;
+    }
+    h2 { color: #a259e6; margin-top: 2em; margin-bottom: 0.5em; }
+    p { font-size: 1.15rem; line-height: 1.7; }
+    ul { margin-left: 1.5em; font-size: 1.08rem; }
+    nav {
+      margin-top: 2.5em;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(120deg, #6a82fb, #fc5c7d, #43cea2, #185a9d);
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: 0 2px 8px #0002;
+    }
+    nav a:hover {
+      background: linear-gradient(120deg, #6a82fb, #fc5c7d, #43cea2, #185a9d);
+      transform: translateY(-2px) scale(1.05);
+    }
+    .logo {
+      width: 60px;
+      margin-bottom: 1.5em;
+      filter: drop-shadow(0 2px 8px #ff704388);
+    }
+    .img-row {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      margin: 2em 0 1.5em 0;
+      flex-wrap: wrap;
+    }
+    .img-row img {
+      border-radius: 12px;
+      box-shadow: 0 4px 16px #0003;
+      width: 320px;  /* Aumentado de 210px a 320px */
+      height: 213px; /* Aumentado proporcionalmente de 140px a 213px */
+      object-fit: cover;
+      transition: transform 0.2s;
+    }
+    .img-row img:hover {
+      transform: scale(1.06) rotate(-2deg);
+    }
+    .video-container {
+      margin: 2em 0;
+      display: flex;
+      justify-content: center;
+    }
+    .video-container iframe {
+      border-radius: 14px;
+      box-shadow: 0 4px 24px #0004;
+      width: 100%;
+      max-width: 640px; /* Aumentado de 480px a 640px */
+      height: 360px;    /* Aumentado proporcionalmente de 270px a 360px */
+    }
+    .model-card {
+      background: #f7f7ffcc;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px #0001;
+      padding: 24px 20px;
+      margin: 1.5em 0;
+      color: #222;
+    }
+    .model-card h3 {
+      color: #185a9d;
+      margin-top: 0;
+    }
+    .model-card ul {
+      margin: 0.5em 0 0 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Logo de Gemini" class="logo">
+      
+    <nav>
+      <a href="estudia_con_gemini.html" target="_blank">🎯 Estudia con Gemini</a>
+      <a href="index.html" target="_blank">🏠 Inicio</a>
+    </nav>
+ 
+    
+    <h1>Modelos de Gemini</h1>
+    <p>
+      <strong>Gemini</strong> es la familia de modelos de inteligencia artificial de Google, diseñada para ofrecer capacidades avanzadas en comprensión, generación de texto, imágenes, audio, y más. Gemini destaca por su enfoque multimodal y su escalabilidad, adaptándose a diferentes necesidades y dispositivos.
+    </p>
+    <div class="img-row">
+      <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=450&fit=crop" alt="Gemini 1.5">
+      <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=450&fit=crop" alt="Gemini Multimodal">
+      <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=450&fit=crop" alt="Gemini IA">
+    </div>
+
+    <h2>Principales modelos de Gemini</h2>
+
+    <div class="model-card">
+      <h3>Gemini Nano</h3>
+      <ul>
+        <li>Optimizado para dispositivos móviles y aplicaciones locales.</li>
+        <li>Bajo consumo de recursos y alta eficiencia.</li>
+        <li>Ideal para tareas como autocompletado, sugerencias inteligentes y asistentes personales.</li>
+        <li>Funciona sin conexión a internet.</li>
+      </ul>
+    </div>
+
+    <div class="model-card">
+      <h3>Gemini Pro</h3>
+      <ul>
+        <li>Modelo versátil para aplicaciones en la nube y web.</li>
+        <li>Capacidades avanzadas de comprensión y generación de texto.</li>
+        <li>Soporte multimodal: texto, imágenes, audio y video.</li>
+        <li>Integración con productos de Google como Bard y Workspace.</li>
+      </ul>
+    </div>
+
+    <div class="model-card">
+      <h3>Gemini Ultra</h3>
+      <ul>
+        <li>El modelo más potente y avanzado de la familia Gemini.</li>
+        <li>Rendimiento superior en benchmarks de IA y tareas complejas.</li>
+        <li>Capacidad de razonamiento avanzado y análisis profundo.</li>
+        <li>Diseñado para investigación, empresas y aplicaciones críticas.</li>
+      </ul>
+    </div>
+
+    <h2>Comparativa de Gemini con otros modelos de IA</h2>
+    <p>
+      Gemini ha sido evaluado frente a otros modelos líderes como GPT-4, Claude 3 y Qwen en diversos benchmarks de comprensión, generación y razonamiento. Los resultados muestran que <strong>Gemini Ultra</strong> supera a la competencia en varias métricas clave, especialmente en tareas multimodales y de razonamiento complejo.
+    </p>
+<div class="img-row">
+  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=450&fit=crop" alt="Gemini Nano">
+  <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=450&fit=crop" alt="Gemini Pro">
+  <img src="https://scontent.fmex1-6.fna.fbcdn.net/v/t39.30808-6/486941567_1074966154655608_2119281107915683029_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=RYQ1CGEpCysQ7kNvwEE2_C8&_nc_oc=AdkPWfgl4yFP-EJOQz8nOgvBHL4wOiInC7e7sXQEckd8XLSCHnVehA_ZsbBJ5-ZQlDbfcB4Xko8jjG_kCz5aeumL&_nc_zt=23&_nc_ht=scontent.fmex1-6.fna&_nc_gid=lbJZQ09G8WXrvDmydchKrA&oh=00_AfLFYd7X1VnoRfb8Cwr46kw7ntcaYiNGPhBzfkXLiTHtbQ&oe=683A932D" alt="Gemini Ultra">
+</div>
+    <div class="video-container">
+      <iframe width="1100" height="619" src="https://www.youtube.com/embed/LflyKhKgv_A" title="DeepSeek vs ChatGPT vs Gemini. Cuál es la MEJOR IA en 2025." frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <center>DeepSeek vs ChatGPT vs Gemini. Cuál es la MEJOR IA en 2025.
+</center>
+
+    <h2>¿Por qué elegir Gemini?</h2>
+    <ul>
+      <li>Rendimiento líder en tareas multimodales y de razonamiento.</li>
+      <li>Modelos adaptados a diferentes necesidades: desde móviles hasta investigación avanzada.</li>
+      <li>Integración nativa con el ecosistema Google.</li>
+      <li>Actualizaciones constantes y soporte de una de las empresas líderes en IA.</li>
+    </ul>
+
+    <nav>
+      <a href="index.html" target="_blank">🏠 Inicio</a>
+      <a href="estudia_con_gemini.html" target="_blank">🎯 Estudia con Gemini</a>
+      <a href="gemini.html" target="_blank">Gemini</a>
+      <a href="gemini_modelos.html" target="_blank">Modelos de Gemini</a>
+      <a href="chatgpt2.html" target="_blank">ChatGPT</a>
+      <a href="chatgpt3.html" target="_blank">ChatGPT 3</a> 
+      <a href="claude.html" target="_blank">Claude</a>
+      <a href="qwen.html" target="_blank">Qwen</a>
+    </nav>
+  </div>
+</body>
+</html>

@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Descubre el Vibe Coding con Qwen: una nueva forma de programar que combina productividad, creatividad y bienestar para desarrolladores.">
+  <meta name="keywords" content="Vibe Coding, Qwen, programación, desarrollo, bienestar, productividad, IA">
+  <meta name="author" content="Vibe Coding">
+  <title>Vibe Coding con Qwen - Programación con Flow</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+    --color-primary: #6C63FF;
+    --color-secondary: #4A00E0;
+    --color-accent: #00F5A0;
+    --color-dark: #1A1A2E;
+    --color-light: #F9F9F9;
+    --color-text: #333;
+    --color-text-light: #F9F9F9;
+    --color-gradient: linear-gradient(135deg, #6C63FF, #4A00E0);
+    --color-gradient-alt: linear-gradient(135deg, #00F5A0, #00D9F5);
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+    --shadow: 0 10px 30px rgba(108, 99, 255, 0.2);
+    --border-radius: 20px;
+    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    body {
+    font-family: var(--font-body);
+    background-color: var(--color-light);
+    color: var(--color-text);
+    line-height: 1.7;
+    overflow-x: hidden;
+    }
+
+   .videos{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 25px; 
+    margin-top: 100px;
+   }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+    width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+    background: var(--color-light);
+    }
+
+    ::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 10px;
+    }
+
+    /* Header */
+    .header {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+
+    .logo {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 1.8rem;
+    background: var(--color-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-decoration: none;
+    letter-spacing: -1px;
+    }
+
+    .nav-menu {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    }
+
+    .nav-link {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: var(--transition);
+    }
+
+    .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--color-gradient);
+    transition: var(--transition);
+    border-radius: 5px;
+    }
+
+    .nav-link:hover {
+    color: var(--color-primary);
+    }
+
+    .nav-link:hover::after {
+    width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--color-dark);
+    position: relative;
+    overflow: hidden;
+    padding: 8rem 2rem 6rem;
+    }
+
+    .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://placehold.co/1920x1080') center/cover no-repeat;
+    opacity: 0.1;
+    }
+
+    .hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 50%, rgba(106, 99, 255, 0.3), transparent 50%),
+    radial-gradient(circle at 70% 30%, rgba(0, 245, 160, 0.3), transparent 50%);
+    }
+
+    .hero-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    }
+
+    .hero-content {
+    color: var(--color-light);
+    }
+
+    .hero-title {
+    font-family: var(--font-heading);
+    font-size: 4.5rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    background: var(--color-gradient-alt);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: rgba(249, 249, 249, 0.9);
+    animation: fadeInUp 1s ease-out 0.2s forwards;
+    opacity: 0;
+    }
+
+    .hero-description {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    color: rgba(249, 249, 249, 0.8);
+    animation: fadeInUp 1s ease-out 0.4s forwards;
+    opacity: 0;
+    }
+
+    .hero-image {
+    position: relative;
+    animation: float 6s ease-in-out infinite;
+    }
+
+    .hero-image img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    }
+
+    .hero-image::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: calc(100% + 40px);
+    height: calc(100% + 40px);
+    background: var(--color-gradient);
+    border-radius: var(--border-radius);
+    z-index: -1;
+    opacity: 0.5;
+    filter: blur(30px);
+    }
+
+    /* Buttons */
+    .btn-container {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    animation: fadeInUp 1s ease-out 0.6s forwards;
+    opacity: 0;
+    }
+
+    .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    }
+
+    .btn-primary {
+    background: var(--color-gradient);
+    color: white;
+    box-shadow: 0 10px 20px rgba(74, 0, 224, 0.3);
+    }
+
+    .btn-primary:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(74, 0, 224, 0.4);
+    }
+
+    .btn-secondary {
+    background: transparent;
+    color: var(--color-light);
+    border: 2px solid var(--color-accent);
+    }
+
+    .btn-secondary:hover {
+    background: var(--color-accent);
+    color: var(--color-dark);
+    transform: translateY(-5px);
+    }
+
+    .btn i {
+    margin-right: 0.5rem;
+    }
+
+    /* Features Section */
+    .section {
+    padding: 8rem 2rem;
+    }
+
+    .section-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    }
+
+    .section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+    }
+
+    .section-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+    }
+
+    .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 5px;
+    background: var(--color-gradient);
+    border-radius: 5px;
+    }
+
+    .section-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+    }
+
+    .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    }
+
+    .feature-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 3rem 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    }
+
+    .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--color-gradient);
+    transition: var(--transition);
+    z-index: -1;
+    }
+
+    .feature-card:hover {
+    transform: translateY(-15px);
+    box-shadow: var(--shadow);
+    }
+
+    .feature-card:hover::before {
+    width: 100%;
+    opacity: 0.1;
+    }
+
+    .feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    background: var(--color-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    }
+
+    .feature-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    }
+
+    .feature-text {
+    color: #666;
+    line-height: 1.7;
+    }
+
+    /* Testimonials Section */
+    .testimonials-section {
+    background: var(--color-dark);
+    color: var(--color-light);
+    position: relative;
+    overflow: hidden;
+    }
+
+    .testimonials-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 70% 30%, rgba(106, 99, 255, 0.2), transparent 50%),
+    radial-gradient(circle at 30% 70%, rgba(0, 245, 160, 0.2), transparent 50%);
+    }
+
+    .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+    }
+
+    .testimonial-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+    }
+
+    .testimonial-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.1);
+    }
+
+    .testimonial-text {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    color: rgba(23, 1, 77, 0.9);
+    }
+
+    .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    }
+
+    .testimonial-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    }
+
+    .testimonial-info {
+    line-height: 1.3;
+    }
+
+    .testimonial-name {
+    font-weight: 700;
+    color: rgba(4, 77, 4, 0.706);
+    }
+
+    .testimonial-role {
+    font-size: 0.9rem;
+    color: rgba(249, 249, 249, 0.7);
+    }
+
+    /* CTA Section */
+    .cta-section {
+    background: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    }
+
+    .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: var(--color-gradient);
+    border-radius: 50%;
+    opacity: 0.1;
+    }
+
+    .cta-section::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    width: 300px;
+    height: 300px;
+    background: var(--color-gradient-alt);
+    border-radius: 50%;
+    opacity: 0.1;
+    }
+
+    .cta-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    }
+
+    .cta-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    }
+
+    .cta-text {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 3rem;
+    }
+
+    /* Footer */
+    .footer {
+    background: var(--color-dark);
+    color: var(--color-light);
+    padding: 5rem 2rem 2rem;
+    }
+
+    .footer-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    }
+
+    .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    }
+
+    .footer-link {
+    color: var(--color-light);
+    text-decoration: none;
+    transition: var(--transition);
+    position: relative;
+    }
+
+    .footer-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transition: var(--transition);
+    }
+
+    .footer-link:hover {
+    color: var(--color-accent);
+    }
+
+    .footer-link:hover::after {
+    width: 100%;
+    }
+
+    .footer-text {
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(249, 249, 249, 0.6);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+    from {
+    opacity: 0;
+    transform: translateY(30px);
+    }
+    to {
+    opacity: 1;
+    transform: translateY(0);
+    }
+    }
+
+    @keyframes float {
+    0%, 100% {
+    transform: translateY(0);
+    }
+    50% {
+    transform: translateY(-20px);
+    }
+    }
+
+    .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: var(--color-gradient);
+    width: 0%;
+    z-index: 1001;
+    transition: width 0.1s ease;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+    .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    }
+
+    .hero-image {
+    grid-row: 1;
+    margin-bottom: 2rem;
+    }
+
+    .btn-container {
+    justify-content: center;
+    }
+
+    .section {
+    padding: 6rem 2rem;
+    }
+    
+    .videos {
+    flex-direction: column;
+    }
+    }
+
+    @media (max-width: 768px) {
+    .nav-menu {
+    display: none;
+    }
+
+    .hero-title {
+    font-size: 3rem;
+    }
+
+    .section-title {
+    font-size: 2.5rem;
+    }
+
+    .features-grid, .testimonials-grid {
+    grid-template-columns: 1fr;
+    }
+    }
+  </style>
+</head>
+<body>
+  <!-- Progress Bar -->
+  <div class="progress-bar"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav-container">
+      <a href="#" class="logo">Vibe<span style="font-weight:300;">Coding</span></a>
+      <ul class="nav-menu">
+        <li><a href="#what-is" class="nav-link">¿Qué es?</a></li>
+        <li><a href="#qwen-apps" class="nav-link">Aplicaciones</a></li>
+        <li><a href="#testimonials" class="nav-link">Testimonios</a></li>
+        <li><a href="#cta" class="nav-link">Comenzar</a></li>
+        <li><a href="https://qwen.ai" class="nav-link" target="_blank" rel="noopener">Qwen Oficial</a></li>
+        <li><a href="qwen.html" class="nav-link">Qwen</a></li>
+        <li><a href="index.html" class="nav-link" target="_blank" rel="noopener">Inicio</a></li>        
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1 class="hero-title">Vibe Coding con Qwen</h1>
+        <p class="hero-subtitle">Programa en sintonía con tu creatividad</p>
+        <p class="hero-description">
+          Descubre una nueva forma de programar que combina productividad, bienestar y creatividad utilizando 
+          Qwen, el modelo de IA avanzado que potencia tu flujo de trabajo y te permite alcanzar el estado de flow.
+        </p>
+        <div class="btn-container">
+          <a href="#qwen-apps" class="btn btn-primary">
+            <i class="fas fa-code"></i> Explorar Aplicaciones
+          </a>
+          <a href="#what-is" class="btn btn-secondary">
+            <i class="fas fa-info-circle"></i> Aprender más
+          </a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Desarrollador en estado de flow">
+      </div>
+    </div>
+  </section>
+
+  <!-- What is Vibe Coding Section -->
+  <section id="what-is" class="section">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">¿Qué es el Vibe Coding?</h2>
+        <p class="section-subtitle">
+          Una filosofía de programación que prioriza el bienestar y la creatividad del desarrollador
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <i class="fas fa-brain feature-icon"></i>
+          <h3 class="feature-title">Estado de Flow</h3>
+          <p class="feature-text">
+            El Vibe Coding busca alcanzar el estado de flow, donde la concentración es total y el tiempo parece detenerse, 
+            maximizando la productividad y la satisfacción al programar.
+          </p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <i class="fas fa-heart feature-icon"></i>
+          <h3 class="feature-title">Bienestar Mental</h3>
+          <p class="feature-text">
+            Prioriza la salud mental del desarrollador, reduciendo el estrés y la frustración mediante herramientas 
+            que facilitan el proceso creativo y eliminan bloqueos.
+          </p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <i class="fas fa-lightbulb feature-icon"></i>
+          <h3 class="feature-title">Creatividad Potenciada</h3>
+          <p class="feature-text">
+            Fomenta soluciones innovadoras al liberar la mente de tareas repetitivas y permitir que la creatividad 
+            fluya naturalmente durante el proceso de desarrollo.
+          </p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <i class="fas fa-clock feature-icon"></i>
+          <h3 class="feature-title">Eficiencia Aumentada</h3>
+          <p class="feature-text">
+            Reduce significativamente el tiempo de desarrollo al eliminar fricciones en el flujo de trabajo y 
+            automatizar tareas rutinarias que interrumpen la concentración.
+          </p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <i class="fas fa-users feature-icon"></i>
+          <h3 class="feature-title">Colaboración Armónica</h3>
+          <p class="feature-text">
+            Mejora la colaboración entre equipos al facilitar la comunicación de ideas complejas y mantener 
+            la coherencia en proyectos compartidos.
+          </p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <i class="fas fa-rocket feature-icon"></i>
+          <h3 class="feature-title">Resultados Superiores</h3>
+          <p class="feature-text">
+            El código producido durante estados de flow tiende a ser más elegante, eficiente y mantenible, 
+            resultando en productos finales de mayor calidad.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qwen Applications Section -->
+  <section id="qwen-apps" class="section testimonials-section">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Uso de Qwen para Desarrollar Aplicaciones</h2>
+        <p class="section-subtitle">
+          Cómo Qwen potencia el Vibe Coding y transforma tu proceso de desarrollo
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card fade-in" style="background: rgba(255, 255, 255, 0.05); color: var(--color-light);">
+          <i class="fas fa-code feature-icon"></i>
+          <h3 class="feature-title" style="color: var(--color-accent);">Asistencia de Código Inteligente</h3>
+          <p class="feature-text" style="color: rgba(249, 249, 249, 0.8);">
+            Qwen comprende el contexto de tu proyecto y genera código de alta calidad, sugiriendo soluciones 
+            optimizadas que mantienen tu estado de flow sin interrupciones.
+          </p>
+        </div>
+
+        <div class="feature-card fade-in" style="background: rgba(255, 255, 255, 0.05); color: var(--color-light);">
+          <i class="fas fa-bug feature-icon"></i>
+          <h3 class="feature-title" style="color: var(--color-accent);">Debugging Avanzado</h3>
+          <p class="feature-text" style="color: rgba(249, 249, 249, 0.8);">
+            Identifica y resuelve errores complejos analizando tu código, explicando problemas y proponiendo 
+            soluciones efectivas que te ahorran horas de frustración.
+          </p>
+        </div>
+
+        <div class="feature-card fade-in" style="background: rgba(255, 255, 255, 0.05); color: var(--color-light);">
+          <i class="fas fa-project-diagram feature-icon"></i>
+          <h3 class="feature-title" style="color: var(--color-accent);">Arquitectura Inteligente</h3>
+          <p class="feature-text" style="color: rgba(249, 249, 249, 0.8);">
+            Ayuda a diseñar arquitecturas de software escalables y mantenibles, sugiriendo patrones de diseño 
+            y estructuras que optimizan el rendimiento y la legibilidad.
+          </p>
+        </div>
+
+        <div class="feature-card fade-in" style="background: rgba(255, 255, 255, 0.05); color: var(--color-light);">
+          <i class="fas fa-language feature-icon"></i>
+          <h3 class="feature-title" style="color: var(--color-accent);">Soporte Multilenguaje</h3>
+          <p class="feature-text" style="color: rgba(249, 249, 249, 0.8);">
+            Trabaja con más de 40 lenguajes de programación y frameworks, permitiéndote mantener tu flow 
+            incluso cuando cambias entre diferentes tecnologías o ecosistemas.
+          </p>
+        </div>
+
+        <div class="feature-card fade-in" style="background: rgba(255, 255, 255, 0.05); color: var(--color-light);">
+          <i class="fas fa-book feature-icon"></i>
+          <h3 class="feature-title" style="color: var(--color-accent);">Documentación Automática</h3>
+          <p class="feature-text" style="color: rgba(249, 249, 249, 0.8);">
+            Genera documentación clara y completa para tu código, ahorrándote tiempo y asegurando que tu 
+            proyecto sea comprensible para otros desarrolladores.
+          </p>
+        </div>
+
+        <div class="feature-card fade-in" style="background: rgba(255, 255, 255, 0.05); color: var(--color-light);">
+          <i class="fas fa-robot feature-icon"></i>
+          <h3 class="feature-title" style="color: var(--color-accent);">Agente de Desarrollo</h3>
+          <p class="feature-text" style="color: rgba(249, 249, 249, 0.8);">
+            Actúa como un compañero de programación que entiende tus objetivos, anticipa necesidades y 
+            te ayuda a mantener la coherencia a lo largo de todo el proyecto.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Videos Section -->
+  <div class="videos">
+    <iframe width="550" height="310" src="https://www.youtube.com/embed/_gg3CugFdZA" title="Qué es vibe coding" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="550" height="310" src="https://www.youtube.com/embed/M5FtHLzTMMY" title="Vibe Coding con Qwen" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>   
+  </div>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="section">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Testimonios</h2>
+        <p class="section-subtitle">
+          Desarrolladores que han transformado su forma de programar con Vibe Coding y Qwen
+        </p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card fade-in">
+          <p class="testimonial-text">
+            "Desde que adopté el Vibe Coding con Qwen, mi productividad se ha duplicado. Las horas de frustración buscando errores o documentación han desaparecido, y ahora disfruto cada sesión de programación."
+          </p>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Ana Martínez" class="testimonial-avatar">
+            <div class="testimonial-info">
+              <p class="testimonial-name">Ana Martínez</p>
+              <p class="testimonial-role">Desarrolladora Full Stack</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-in">
+          <p class="testimonial-text">
+            "Qwen3 ha revolucionado cómo gestiono proyectos complejos. Su capacidad para entender el contexto y generar soluciones elegantes me permite mantener el estado de flow durante horas."
+          </p>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos Vega" class="testimonial-avatar">
+            <div class="testimonial-info">
+              <p class="testimonial-name">Carlos Vega</p>
+              <p class="testimonial-role">Arquitecto de Software</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-in">
+          <p class="testimonial-text">
+            "Como líder de equipo, he visto cómo el Vibe Coding con Qwen ha transformado nuestra dinámica. Los desarrolladores están más motivados y el código es notablemente más limpio y mantenible."
+          </p>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Elena Durán" class="testimonial-avatar">
+            <div class="testimonial-info">
+              <p class="testimonial-name">Elena Durán</p>
+              <p class="testimonial-role">CTO en TechVibe</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-in">
+          <p class="testimonial-text">
+            "He probado Qwen3 y es perfecto para Vibe Coding. Su capacidad de razonamiento híbrido me permite resolver problemas complejos sin romper mi concentración. ¡Es como tener un mentor siempre disponible!"
+          </p>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Miguel Sánchez" class="testimonial-avatar">
+            <div class="testimonial-info">
+              <p class="testimonial-name">Miguel Sánchez</p>
+              <p class="testimonial-role">Desarrollador de IA</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- CTA Section -->
+  <section id="cta" class="section cta-section">
+    <div class="cta-container">
+      <h2 class="cta-title">Transforma tu Experiencia de Programación</h2>
+      <p class="cta-text">
+        Únete a la comunidad de desarrolladores que han descubierto el poder del Vibe Coding con Qwen. 
+        Experimenta una nueva forma de programar donde la creatividad fluye y la productividad se maximiza.
+      </p>
+      <a href="https://qwen.ai" class="btn btn-primary" target="_blank" rel="noopener">
+        <i class="fas fa-rocket"></i> Comenzar con Qwen
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-links">
+        <a href="#what-is" class="footer-link">¿Qué es Vibe Coding?</a>
+        <a href="#qwen-apps" class="footer-link">Aplicaciones con Qwen</a>
+        <a href="#testimonials" class="footer-link">Testimonios</a>
+        <a href="https://qwen.ai" class="footer-link" target="_blank" rel="noopener">Qwen Oficial</a>
+        <a href="https://github.com/QwenLM" class="footer-link" target="_blank" rel="noopener">GitHub</a>
+        <a href="qwen.html" class="footer-link" target="_blank" rel="noopener">Qwen</a>
+        <a href="index.html" class="footer-link" target="_blank" rel="noopener">Inicio</a>
+      </div>
+      <p class="footer-text">
+        &copy; 2025 Vibe Coding. Potenciado por Qwen - El futuro de la programación creativa.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Scroll progress bar
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.offsetHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      document.querySelector('.progress-bar').style.width = scrollPercent + '%';
+    });
+
+    // Fade in animation on scroll
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeElements.forEach(element => {
+      observer.observe(element);
+    });
+
+    // Page load animation
+    window.addEventListener('load', () => {
+      document.body.classList.add('loaded');
+    });
+  </script>
+</body>
+</html>
