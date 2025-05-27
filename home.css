@@ -1,0 +1,513 @@
+  
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --secondary: #334155;
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --bg-primary: #fefefe;
+            --bg-secondary: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Confetti Container - This holds all confetti pieces */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        /* Individual confetti piece styling */
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            opacity: 0.8;
+            animation: confetti-fall 20s linear forwards;
+        }
+
+        /* Confetti falling animation */
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Different confetti shapes */
+        .confetti-piece.square {
+            border-radius: 0;
+        }
+
+        .confetti-piece.circle {
+            border-radius: 50%;
+        }
+
+        .confetti-piece.triangle {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid;
+            background: transparent;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4, #10b981);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        .header h2 {
+            font-size: 1rem;
+            font-weight: 500;
+            background: linear-gradient(90deg, #f59e0b, #ef4444, #8b5cf6);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: fantasy;
+            animation: gradientShift 4s ease-in-out infinite reverse;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 60% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 30% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+            animation: floatingOrbs 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .main-container::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(139, 92, 246, 0.03) 50%,
+                transparent 70%
+            );
+            animation: rotateBackground 15s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .assistants-grid {
+            display: grid;
+            gap: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .assistant-item {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .assistant-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+            border-color: var(--accent-light);
+        }
+
+        .assistant-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--accent), var(--accent-light));
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .assistant-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .assistant-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 600;
+            color: white;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .assistant-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg) translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .assistant-item:hover .assistant-icon::after {
+            transform: rotate(45deg) translateX(100%);
+        }
+
+        .assistant-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .assistant-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .assistant-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .assistant-arrow {
+            margin-left: 1rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            transform: translateX(0);
+        }
+
+        .assistant-item:hover .assistant-arrow {
+            transform: translateX(4px);
+            color: var(--accent);
+        }
+
+        /* Colores específicos para cada asistente */
+        .chatgpt { background: linear-gradient(135deg, #00d4aa, #00b894); }
+        .qwen { background: linear-gradient(135deg, #6c5ce7, #a29bfe); }
+        .gemini { background: linear-gradient(135deg, #fdcb6e, #e17055); }
+        .claude { background: linear-gradient(135deg, #fd79a8, #e84393); }
+        .deepseek { background: linear-gradient(135deg, #0984e3, #74b9ff); }
+        .llama { background: linear-gradient(135deg, #00b894, #00cec9); }
+        .mistral { background: linear-gradient(135deg, #e17055, #fd79a8); }
+        .grok { background: linear-gradient(135deg, #fdcb6e, #f39c12); }
+        .copilot { background: linear-gradient(135deg, #6c5ce7, #8e44ad); }
+        .perplexity { background: linear-gradient(135deg, #e17055, #d63031); }
+        .meta-ai { background: linear-gradient(135deg, #00b894, #0984e3); }
+        .hugging-chat { background: linear-gradient(135deg, #fdcb6e, #e17055); }
+
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-info h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.25rem;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        .footer-info h4 {
+            font-size: 0.9rem;
+            background: linear-gradient(90deg, #f59e0b, #10b981);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'JetBrains Mono', monospace;
+            animation: gradientShift 4s ease-in-out infinite reverse;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .social-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .social-icon:hover::before {
+            left: 100%;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: linear-gradient(135deg, #10b981, #f59e0b, #ef4444);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #00c3ff, #ffff1c, #ff4e50, #1cd8d2, #00c3ff);
+  background-size: 400% 400%;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 4s ease-in-out infinite;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  letter-spacing: 2px;
+ font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes floatingOrbs {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(20px, -20px) scale(1.1);
+            }
+            50% {
+                transform: translate(-10px, 10px) scale(0.9);
+            }
+            75% {
+                transform: translate(-20px, -10px) scale(1.05);
+            }
+        }
+
+        @keyframes rotateBackground {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 2rem 1rem;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .assistant-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem 1rem;
+            }
+
+            .assistant-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .assistant-arrow {
+                margin: 0.5rem 0 0 0;
+                transform: rotate(90deg);
+            }
+
+            .assistant-item:hover .assistant-arrow {
+                transform: rotate(90deg) translateX(4px);
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content,
+            .main-container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .assistant-item {
+                padding: 1rem;
+            }
+
+            .social-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+
+
+.header h2.asistentes {
+ font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+ font-weight: bolder;
+ font-size: 1.5rem;
+}

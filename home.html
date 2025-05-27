@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UACM - Plantel Casa Libertad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <!-- Confetti container that will hold all the falling pieces -->
+    <div class="confetti-container" id="confetti-container"></div>
+
+    <header class="header">
+        <div class="header-content">
+            <h1>Universidad Autónoma de la Ciudad de México</h1>
+            <h2 class="asistentes">Asistentes de IA conversacionales</h2>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="assistants-grid">
+            <a href="chatgpt2.html" target="_blank" class="assistant-item">
+                <div class="assistant-icon chatgpt">GPT</div>
+                <div class="assistant-content">
+                    <h2 class="assistant-name">ChatGPT</h2>
+                    <p class="assistant-description">Explora este asistente pionero de OpenAI que revoluciona la interacción humano-máquina, ofreciendo respuestas contextuales y versátiles para múltiples tareas, desde redacción creativa hasta resolución de problemas técnicos complejos.</p>
+                </div>
+                <i class="fas fa-arrow-right assistant-arrow"></i>
+            </a>
+
+            <a href="qwen.html" target="_blank" class="assistant-item">
+                <div class="assistant-icon qwen">QW</div>
+                <div class="assistant-content">
+                    <h2 class="assistant-name">Qwen</h2>
+                    <p class="assistant-description">Explora el asistente desarrollado por Alibaba que destaca por su comprensión multilingüe y capacidades multimodales, integrando procesamiento de texto e imágenes para ofrecer respuestas contextualizadas y precisas.</p>
+                </div>
+                <i class="fas fa-arrow-right assistant-arrow"></i>
+            </a>
+
+            <a href="gemini.html" target="_blank" class="assistant-item">
+                <div class="assistant-icon gemini">GM</div>
+                <div class="assistant-content">
+                    <h2 class="assistant-name">Gemini</h2>
+                    <p class="assistant-description">Conoce el modelo multimodal avanzado de Google que integra comprensión de texto, imágenes y datos, ofreciendo capacidades de razonamiento sofisticadas y aplicaciones prácticas en diversos campos del conocimiento.</p>
+                </div>
+                <i class="fas fa-arrow-right assistant-arrow"></i>
+            </a>
+
+            <a href="claude.html" target="_blank" class="assistant-item">
+                <div class="assistant-icon claude">CL</div>
+                <div class="assistant-content">
+                    <h2 class="assistant-name">Claude</h2>
+                    <p class="assistant-description">Conoce el asistente de Anthropic diseñado con enfoque en seguridad y alineación ética, capaz de generar contenido útil, inofensivo y honesto, destacándose por su capacidad de razonamiento y comprensión de contextos complejos.</p>
+                </div>
+                <i class="fas fa-arrow-right assistant-arrow"></i>
+            </a>
+
+            <a href="https://www.deepseek.com/" target="_blank" class="assistant-item">
+                <div class="assistant-icon deepseek">DS</div>
+                <div class="assistant-content">
+                    <h2 class="assistant-name">DeepSeek</h2>
+                    <p class="assistant-description">Descubre este modelo de IA especializado en procesamiento de lenguaje natural con capacidades avanzadas para análisis de texto, generación de código y resolución de problemas técnicos con precisión y eficiencia.</p>
+                </div>
+                <i class="fas fa-arrow-right assistant-arrow"></i>
+            </a>
+
+            <a href="https://llama.meta.com/" target="_blank" class="assistant-item">
+                <div class="assistant-icon llama">LL</div>
+                <div class="assistant-content">
+                    <h2 class="assistant-name">Llama</h2>
+                    <p class="assistant-description">Conoce el modelo de código abierto de Meta que democratiza el acceso a la IA generativa, permitiendo a desarrolladores e investigadores adaptar sus capacidades para diversas aplicaciones y casos de uso específicos.</p>
+                </div>
+                <i class="fas fa-arrow-right assistant-arrow"></i>
+            </a>
+
+            <a href="https://mistral.ai/" target="_blank" class="assistant-item">
+                <div class="assistant-icon mistral">MI</div>
+                <div class="assistant-content">
+                    <h2 class="assistant-name">Mistral</h2>
+                    <p class="assistant-description">Explora este modelo eficiente y potente que ofrece rendimiento excepcional incluso en versiones compactas, destacándose por su arquitectura optimizada y capacidad para funcionar en diversos entornos con recursos limitados.</p>
+                </div>
+                <i class="fas fa-arrow-right assistant-arrow"></i>
+            </a>
+
+            <a href="https://grok.x.ai/" target="_blank" class="assistant-item">
+                <div class="assistant-icon grok">GR</div>
+                <div class="assistant-content">
+                    <h2 class="assistant-name">Grok</h2>
+                    <p class="assistant-description">Descubre el asistente desarrollado por xAI con personalidad distintiva y enfoque en respuestas creativas, diseñado para interacciones más naturales y con acceso a información actualizada para responder consultas en tiempo real.</p>
+                </div>
+                <i class="fas fa-arrow-right assistant-arrow"></i>
+            </a>
+
+            <a href="https://copilot.microsoft.com/" target="_blank" class="assistant-item">
+                <div class="assistant-icon copilot">CP</div>
+                <div class="assistant-content">
+                    <h2 class="assistant-name">Copilot</h2>
+                    <p class="assistant-description">Explora esta herramienta de Microsoft que potencia la productividad integrándose con aplicaciones cotidianas, asistiendo en la creación de contenido, programación y automatización de tareas con sugerencias contextuales inteligentes.</p>
+                </div>
+                <i class="fas fa-arrow-right assistant-arrow"></i>
+            </a>
+
+            <a href="https://www.perplexity.ai/" target="_blank" class="assistant-item">
+                <div class="assistant-icon perplexity">PX</div>
+                <div class="assistant-content">
+                    <h2 class="assistant-name">Perplexity</h2>
+                    <p class="assistant-description">Descubre este asistente especializado en búsqueda y síntesis de información que combina capacidades de IA generativa con navegación web en tiempo real, proporcionando respuestas fundamentadas con citas verificables.</p>
+                </div>
+                <i class="fas fa-arrow-right assistant-arrow"></i>
+            </a>
+
+            <a href="https://meta.ai/" target="_blank" class="assistant-item">
+                <div class="assistant-icon meta-ai">MA</div>
+                <div class="assistant-content">
+                    <h2 class="assistant-name">Meta AI</h2>
+                    <p class="assistant-description">Conoce el asistente conversacional de Meta integrado en sus plataformas sociales, diseñado para interacciones naturales y personalizadas, con capacidades creativas y acceso a información actualizada para consultas diversas.</p>
+                </div>
+                <i class="fas fa-arrow-right assistant-arrow"></i>
+            </a>
+
+            <a href="https://huggingface.co/chat/" target="_blank" class="assistant-item">
+                <div class="assistant-icon hugging-chat">HF</div>
+                <div class="assistant-content">
+                    <h2 class="assistant-name">Hugging Chat</h2>
+                    <p class="assistant-description">Explora esta interfaz conversacional de Hugging Face basada en modelos abiertos, que promueve la transparencia y accesibilidad en IA, permitiendo experimentar con diversos modelos de lenguaje en un entorno amigable.</p>
+                </div>
+                <i class="fas fa-arrow-right assistant-arrow"></i>
+            </a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://www.facebook.com/groups/559229716298699" target="_blank" class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.tiktok.com/" target="_blank" class="social-icon">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="contacto.html" target="_blank" class="social-icon">
+                    <i class="fa-solid fa-info-circle"></i>
+                </a>
+            </div>
+            
+            <div class="footer-info">
+                <h3>Armando Valera Paulino</h3>
+                <h4>armando.valera@uacm.edu.mx</h4>
+            </div>
+            
+            <div class="social-links">
+                <a href="ubicacion.html" target="_blank" class="social-icon">
+                    <i class="fa-solid fa-map-location"></i>
+                </a>               
+                <a href="https://wa.me/" target="_blank" class="social-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://twitter.com/" target="_blank" class="social-icon">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="https://t.me/" target="_blank" class="social-icon">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Confetti animation JavaScript with triple execution capability
+        function createConfetti(iteration = 0) {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffa726', '#ab47bc', '#26c6da', '#66bb6a'];
+            const shapes = ['square', 'circle', 'triangle'];
+            
+            // Create 150 confetti pieces for a rich effect
+            for (let i = 0; i < 150; i++) {
+                createConfettiPiece(container, colors, shapes, iteration);
+            }
+            
+            // Remove confetti after 20 seconds, accounting for which iteration this is
+            // Each iteration gets cleaned up independently to avoid interfering with subsequent animations
+            setTimeout(() => {
+                // Only remove confetti pieces from this specific iteration
+                const confettiPieces = container.querySelectorAll(`.confetti-iteration-${iteration}`);
+                confettiPieces.forEach(piece => {
+                    if (container.contains(piece)) {
+                        container.removeChild(piece);
+                    }
+                });
+            }, 20000);
+        }
+        
+        function createConfettiPiece(container, colors, shapes, iteration = 0) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti-piece');
+            // Add iteration-specific class to track which animation cycle this piece belongs to
+            confetti.classList.add(`confetti-iteration-${iteration}`);
+            
+            // Random shape selection
+            const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+            confetti.classList.add(randomShape);
+            
+            // Random color selection
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Apply color based on shape type
+            if (randomShape === 'triangle') {
+                confetti.style.borderBottomColor = randomColor;
+            } else {
+                confetti.style.background = randomColor;
+            }
+            
+            // Random horizontal position across the screen
+            confetti.style.left = Math.random() * 100 + '%';
+            
+            // Random size between 6px and 12px
+            const size = Math.random() * 6 + 6;
+            if (randomShape !== 'triangle') {
+                confetti.style.width = size + 'px';
+                confetti.style.height = size + 'px';
+            }
+            
+            // Random animation delay to stagger the falling
+            confetti.style.animationDelay = Math.random() * 3 + 's';
+            
+            // Random animation duration between 18-22 seconds
+            confetti.style.animationDuration = (Math.random() * 4 + 18) + 's';
+            
+            // Add slight horizontal drift during fall
+            const drift = (Math.random() - 0.5) * 100;
+            confetti.style.setProperty('--drift', drift + 'px');
+            
+            container.appendChild(confetti);
+            
+            // Stagger creation of confetti pieces over first 2 seconds
+            setTimeout(() => {
+                if (container.contains(confetti)) {
+                    confetti.style.animation = `confetti-fall ${confetti.style.animationDuration} linear forwards`;
+                }
+            }, Math.random() * 2000);
+        }
+        
+        // Execute confetti animation three times with strategic timing
+        window.addEventListener('load', function() {
+            // First execution: starts immediately when page loads
+            createConfetti(0);
+            
+            // Second execution: starts after 25 seconds (20s animation + 5s buffer)
+            setTimeout(() => {
+                createConfetti(1);
+            }, 25000);
+            
+            // Third execution: starts after 50 seconds (allows second animation to complete)
+            setTimeout(() => {
+                createConfetti(2);
+            }, 50000);
+        });
+    </script>
+</body>
+</html>
