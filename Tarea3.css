@@ -1,0 +1,346 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .contenedor {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .encabezado {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .encabezado h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .encabezado p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .contenido-formulario {
+            padding: 40px;
+        }
+
+        .seccion {
+            margin-bottom: 40px;
+        }
+
+        .titulo-seccion {
+            display: flex;
+            align-items: center;
+            font-size: 1.4em;
+            color: #1e3c72;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #ff6b35;
+        }
+
+        .icono-seccion {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2em;
+        }
+
+        .campo-formulario {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .requerido {
+            color: #ff6b35;
+            margin-left: 4px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            background: #fafafa;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        input[type="text"]:invalid:not(:placeholder-shown),
+        input[type="email"]:invalid:not(:placeholder-shown),
+        input[type="tel"]:invalid:not(:placeholder-shown) {
+            border-color: #ff6b35;
+            background: #fff5f5;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .contenedor-cursos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .curso-opcion {
+            position: relative;
+        }
+
+        .curso-opcion input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .curso-tarjeta {
+            display: flex;
+            align-items: center;
+            padding: 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fafafa;
+            height: 100%;
+        }
+
+        .curso-tarjeta:hover {
+            border-color: #667eea;
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .curso-opcion input[type="checkbox"]:checked + .course-card {
+            border-color: #667eea;
+            background-color: gray;
+            color: white;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .curso-icono {
+            font-size: 1.8em;
+            margin-right: 12px;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .curso-nombre {
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .selection-counter {
+            background: #fff3e0;
+            border-left: 4px solid #ff6b35;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .boton-enviar {
+            width: 100%;
+            padding: 18px;
+            background-color: #ff6b35;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+            margin-top: 20px;
+        }
+
+        .boton-enviar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .boton-enviar:active {
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .encabezado {
+                padding: 30px 20px;
+            }
+
+            .encabezado h1 {
+                font-size: 1.5em;
+            }
+
+            .contenido-formulario {
+                padding: 25px 20px;
+            }
+
+            .contenedor-cursos {
+                grid-template-columns: 1fr;
+            }
+
+            .titulo-seccion {
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .encabezado h1 {
+                font-size: 1.3em;
+            }
+
+            .encabezado p {
+                font-size: 0.95em;
+            }
+
+            .icono-seccion {
+                width: 28px;
+                height: 28px;
+                font-size: 1em;
+            }
+        }
+    
+
+.boton-enviar{
+    animation: vibrate 3s linear 3;
+}
+
+@keyframes vibrate {
+  0%, 100% {
+    transform: translate(0);
+    background-color: #430ed4; 
+  }
+  20%, 60% {
+    transform: translate(-2px, 2px);
+    background-color: #059914; 
+ }
+  40%, 80% {
+    transform: translate(-2px, -2px);
+    background-color: #9f1295; 
+  }
+}
+
+.idiomas .curso-tarjeta, .programacion .curso-tarjeta {
+    animation: rotate-in-center 1.2s ease-in-out 6 both;
+}
+
+
+/* animation rotate-in-center */
+
+@keyframes rotate-in-center {
+  0% {
+            transform: rotate(-360deg);
+            background-color: #430ed4;   
+            color:white;        
+  }
+  50% {    
+            transform: rotate(-180);    
+            background-color: #059914;     
+            color:white;
+  }
+
+  75%{
+             transform: rotate(-90);    
+            background-color: #9f1295;  
+            color:white;
+  }
+
+  100%{
+           transform: rotate(0);    
+            background-color:#fafafa;
+  }
+}
+
+
+.titulo-seccion{
+             animation: tracking-in-expand 2s ease-in-out both 2;
+}
+
+
+/**
+ * ----------------------------------------
+ * animation tracking-in-expand
+ * ----------------------------------------
+ */
+@-webkit-keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+

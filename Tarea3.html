@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Estudiantes - Cursos de Extensión</title>
+    <link rel="stylesheet" href="Tarea3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>   
+    
+</head> 
+<body>
+    <div class="contenedor">
+        <div class="encabezado">
+            <h1 class="animate__animated animate__backInDown animate__repeat-3">Universidad Autónoma de la Ciudad de México</h1>
+            <h1 class="animate__animated animate__bounce animate__infinite">📚 Registro de Estudiantes</h1>
+            <p>Cursos de Extensión Universitaria 2026</p>
+        </div>
+
+        <form class="contenido-formulario">
+            <!-- Datos Personales -->
+            <div class="seccion">
+                <h2 class="titulo-seccion">
+                    <span class="icono-seccion">👤</span>
+                    Datos Personales
+                </h2>
+
+                <div class="campo-formulario">                    
+                    <label for="nombreCompleto">Nombre Completo<span class="requerido">*</span></label>
+                    <input type="text" required placeholder="Ej: Juan Pérez García">
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="email">Correo Electrónico<span class="requerido">*</span></label>
+                    <input type="email" required placeholder="nombre.apellido@estudiantxs.uacm.edu.mx">
+                    
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="numeroTelefono">Número de Teléfono<span class="requerido">*</span></label>
+                    <input type="tel" required placeholder="+52 55 5123 4567">                    
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="carrera">Carrera / Programa Académico<span class="requerido">*</span></label>
+                    <select id="carrera" name="carrera" required>
+                        <option value="">Selecciona tu Carrera</option>
+                        <option value="">Modelación Matemática</option>
+                        <option value="">Nutrición y Salud</option>
+                        <option value="">Promoción de la Salud</option>
+                        <option value="">Ing. en Sistemas Electrónicos Industriales</option>
+                        <option value="">Ciencia Política y Administración Urbana</option>
+                        <option value="">Ing. en Sistemas Electrónicos y de Telecomunicaciones</option>
+                        <option value="">Ingeniería de Software</option>   
+                        <option value=""></option>       
+                        
+                    </select>
+                </div>
+            </div>
+
+            <!-- Selección de Cursos -->
+            <div class="seccion">
+                <h2 class="titulo-seccion">
+                    <span class="icono-seccion">🎓</span>
+                    Cursos de Extensión Universitaria
+                </h2>
+
+                <p style="margin-bottom: 20px; color: #666;">
+                    Selecciona los cursos de tu interés:
+                </p>
+
+                <div class="contenedor-cursos">
+                    <div class="curso-opcion idiomas">
+                        <input type="checkbox">
+                        <label for="curso1" class="curso-tarjeta">
+                            <span class="curso-icono">🌍</span>
+                            <span class="curso-nombre">Idiomas<br>(Inglés, Francés, Alemán)</span>
+                        </label>
+                    </div>
+
+                    <div class="curso-opcion programacion">
+                        <input type="checkbox">
+                        <label for="curso2" class="curso-tarjeta">
+                            <span class="curso-icono">💻</span>
+                            <span class="curso-nombre">Programación y Desarrollo Web</span>
+                        </label>
+                    </div>
+
+                    <div class="curso-opcion">
+                        <input type="checkbox">
+                        <label for="curso3" class="curso-tarjeta">
+                            <span class="curso-icono">🏥</span>
+                            <span class="curso-nombre">Salud Pública</span>
+                        </label>
+                    </div>
+
+                    <div class="curso-opcion">
+                        <input type="checkbox">
+                        <label for="curso4" class="curso-tarjeta">
+                            <span class="curso-icono">🚀</span>
+                            <span class="curso-nombre">Emprendimiento e Innovación</span>
+                        </label>
+                    </div>
+
+                    <div class="curso-opcion">
+                        <input type="checkbox">
+                        <label for="curso5" class="curso-tarjeta">
+                            <span class="curso-icono">🤖</span>
+                            <span class="curso-nombre">Inteligencia Artificial (IA) en Robótica</span>
+                        </label>
+                    </div>
+
+                    <div class="curso-opcion">
+                        <input type="checkbox">
+                        <label for="curso6" class="curso-tarjeta">
+                            <span class="curso-icono">📱</span>
+                            <span class="curso-nombre">Nutrición Deportiva</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="seccion">
+                <h2 class="titulo-seccion">
+                    <span class="icono-seccion">💬</span>
+                    Información Adicional
+                </h2>
+
+                <div class="campo-formulario">
+                    <label for="comentarios">Comentarios o Expectativas (Opcional)</label>
+                    <textarea id="comentarios" placeholder="Cuéntanos qué esperas aprender en estos cursos..."></textarea>
+                    
+                </div>
+            </div>            
+            <button type="submit" class="boton-enviar">✓ Enviar Registro</button>                                          
+        </form>
+    </div>
+
+</body>
+</html>
