@@ -99,3 +99,42 @@ a{
             transform: translateY(8px);
   }
 }
+
+
+
+
+.tracking-in-expand {
+	-webkit-animation: tracking-in-expand .9s ease  infinite;
+	        animation: tracking-in-expand .9s ease infinite;
+}
+
+
+
+/**
+ * ----------------------------------------
+ * animation tracking-in-expand
+ * ----------------------------------------
+ */
+
+@keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    color: bisque;
+    opacity: 0;
+  }
+  40% {
+    color: greenyellow;
+    opacity: 0.6;
+  }
+
+  60% {
+    color:greenyellow;
+    opacity: 0.8;
+  }
+
+
+  100% {
+    color: bisque;
+    opacity: 1;
+  }
+}
