@@ -1,360 +1,251 @@
-* {
+*{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-a {
-    text-decoration: none;
+body, html{
+     background-color: rgb(19, 78, 156);
+    color:aliceblue;
 }
 
-:root {
-    --primary: #1a237e;
-    --secondary: #ffc107;
-    --accent: #ff5722;
-    --dark: #121212;
-    --light: #f5f5f5;
-    --gradient: linear-gradient(135deg, var(--primary), #303f9f);
+
+h1{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 55px;
 }
 
-html {
-    scroll-behavior: smooth;
+.materias{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: x-large;
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    background: var(--light);
-    color: #333;
-    min-height: 100vh;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    padding-top: 70px;
-    padding-bottom: 70px;
-    overflow-x: hidden;
-}
-
-header, footer {
-    width: 100%;
-    min-height: 60px;
-    height: auto;
-    padding: 8px 0;
-    position: fixed;
-    left: 0;
-    z-index: 1000;
-    background: var(--gradient);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
-}
-
-header {
-    top: 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-footer {
-    bottom: 0;
-    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
-}
-
-header h1 {
-    margin: 3px 0;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 1.6rem;
-    letter-spacing: 1px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-header h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
-    color: var(--secondary);
-    letter-spacing: 0.5px;
-    margin-bottom: 3px;
-}
-
-.contenedor {
-    width: 100%;
-    max-width: 1300px;
-    margin: 30px auto;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.tarjeta {
-    width: 100%;
-    height: 100%;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    /* Mejorando el sombreado para hacerlo más sutil y elegante */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    display: flex;
-    flex-direction: column;
-    justify-self: center;
-    position: relative;
-    border: 1px solid rgba(0, 0, 0, 0.05); /* Borde sutil inicial */
-    animation: fadeIn 0.6s ease forwards;
-    opacity: 0;
-}
-
-.tarjeta:hover {
-    transform: translateY(-10px);
-    /* Sombreado más pronunciado al hacer hover */
-    box-shadow: 0 15px 30px rgba(26, 35, 126, 0.15), 0 10px 10px rgba(26, 35, 126, 0.07);
-    border: 1px solid var(--secondary); /* Borde con color secundario al hacer hover */
-}
-
-/* Modificando el efecto de línea superior para que sea más sutil */
-.tarjeta::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--accent), var(--secondary));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
-}
-
-.tarjeta:hover::before {
-    transform: scaleX(1);
-}
-
-/* Añadiendo un efecto de brillo sutil en los bordes al hacer hover */
-.tarjeta::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 12px;
-    pointer-events: none;
-    box-shadow: inset 0 0 0 0 rgba(255, 193, 7, 0);
-    transition: box-shadow 0.4s ease;
-}
-
-.tarjeta:hover::after {
-    box-shadow: inset 0 0 0 2px rgba(255, 193, 7, 0.5);
-}
-
-.tarjeta img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    margin: 0;
-    transition: transform 0.5s ease;
-}
-
-.tarjeta:hover img {
-    transform: scale(1.05);
-}
-
-.tarjeta h2 {
-    margin: 15px 20px 10px;
-    color: var(--primary);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.3rem;
-    font-weight: 600;
-    position: relative;
-    padding-bottom: 10px;
-}
-
-.tarjeta h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50px;
-    height: 3px;
-    background: var(--secondary);
-}
-
-.tarjeta p {
-    padding: 0 20px 25px;
-    line-height: 1.6;
-    color: #555;
-    font-size: 0.95rem;
-    flex-grow: 1;
-}
-
-/* Nuevo estilo para el footer */
-.footer-container {
-    width: 100%;
-    max-width: 1300px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-}
-
-.footer-info {
+h1, .materias{
     text-align: center;
+    padding: 20px;
 }
 
-footer h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    margin: 3px 0;
-    font-size: 1.1rem;
+.nav_span{
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-footer h4 {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400;
-    color: var(--secondary);
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-}
 
-footer h4:hover {
-    color: white;
-    transform: scale(1.05);
-}
-
-/* Estilos para los iconos sociales */
-.social-left, .social-right {
+nav{
     display: flex;
-    gap: 15px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;    
 }
 
-.social-icon {
+.nav{
+    margin: 20px;
+    text-decoration: none;
+    padding: 10px 30px;
+    background-color: rgb(19, 78, 156);
+    color:aliceblue;
+    border: 1px solid navy;
+    border-radius: 50px;
+    box-shadow: 0 0 10px navy;
+    
+}
+
+.nav:hover{    
+    background-color:  rgba(78, 149, 241, 0.567);
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+    box-shadow: 0 0 10px blue;
+}
+
+
+
+main{
+   margin-top: 30px;   
+}
+
+.sobremi{
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     gap: 2rem;
+     background: rgba(255, 255, 255, 0.1);
+     padding: 2rem;
+     border-radius: 22px;
+     backdrop-filter: blur(10px);
+     flex-wrap: wrap;
+     margin: 22px 111px;
+}
+
+.profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            flex-shrink: 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+.contenido{
+   flex: 1;
+
+}
+
+p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: larger;
+}
+
+.caja{
+      width: 166px;  height: 166px;
+      border-radius: 22px;
+      border: 1px solid lightblue;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 22px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.caja:hover{
+    transform: translateY(-5px) scale(1.05);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    transition: all 0.2 ease;
+}
+.contenedor{
+    background-color: #ff9a9e;
+    padding: 44px;
+    margin: 22px 111px;
     display: flex;
+    gap:44px;
     justify-content: center;
     align-items: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    font-size: 1rem;    
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 22px;
 }
 
-.social-icon:hover {
-    transform: translateY(-5px) rotate(5deg);
-    color: var(--primary);
-    background: var(--secondary);
-    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+.fa-html5{
+    color: orangered;
 }
 
-/* Efecto de onda al hacer hover */
-.social-icon::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.5s, height 0.5s;
+.fa-css3-alt{
+    color:dodgerblue;
 }
 
-.social-icon:hover::after {
-    width: 150%;
-    height: 150%;
+.fa-square-js{
+    color:yellow;
 }
 
-/* Animación para las tarjetas */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.fa-react{
+    color: blue;
 }
 
-.tarjeta:nth-child(1) { animation-delay: 0.1s; }
-.tarjeta:nth-child(2) { animation-delay: 0.2s; }
-.tarjeta:nth-child(3) { animation-delay: 0.3s; }
-.tarjeta:nth-child(4) { animation-delay: 0.4s; }
-.tarjeta:nth-child(5) { animation-delay: 0.5s; }
-.tarjeta:nth-child(6) { animation-delay: 0.6s; }
-.tarjeta:nth-child(7) { animation-delay: 0.7s; }
-.tarjeta:nth-child(8) { animation-delay: 0.8s; }
-.tarjeta:nth-child(9) { animation-delay: 0.9s; }
-.tarjeta:nth-child(10) { animation-delay: 1s; }
-.tarjeta:nth-child(11) { animation-delay: 1.1s; }
-.tarjeta:nth-child(12) { animation-delay: 1.2s; }
-
-/* Media queries para responsive */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 1.3rem;
-        text-align: center;
-        padding: 0 10px;
-    }
-    
-    header h3 {
-        font-size: 0.9rem;
-    }
-    
-    .contenedor {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 20px;
-        padding: 0 15px;
-    }
-    
-    .footer-container {
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-    }
-    
-    .social-left, .social-right {
-        gap: 10px;
-    }
+.fa-node{
+    color: green;
 }
 
-@media (max-width: 480px) {
-    header, footer {
-        min-height: 50px;
-        padding: 6px 0;
-    }
+.galeria{
+    padding: 44px;
+    background-color: rgba(255,255,255,0.1);
+    margin: 22px 111px;
+    border-radius: 22px;           
+}
+
+.emojis{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 44px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.item{
+    font-size: 44px;       
+    width: 188px;  height: 188px;
+    border-radius: 22px;
+    border: 1px solid greenyellow;
+          
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(14, 176, 122, 0.855);
+}
+
+.item:hover{
+    transform: rotate(12deg) scale(1.03);
+    transition: all 2s ease;
+}
+
+.redessociales{
+    padding: 44px;
+    margin: 22px 111px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 22px;
     
-    body {
-        padding-top: 60px;
-        padding-bottom: 60px;
-    }
+    display: flex;
+    gap:44px;
+    justify-content: center;
+    align-items: center;
+}
+
+.rs{
+    color:rgba(196, 64, 16, 0.92);    
+
+}
+
+.rs:hover{
+    transform: rotate(-360deg);
+    transition: all .3s ease;
+}
+
+.pie{
+    text-align: center;
+    margin: 22px;
+}
+
+
+.proyectos{
+    padding: 44px;
+    margin: 22px 111px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 22px;
     
-    header h1 {
-        font-size: 1.1rem;
-        margin: 2px 0;
-    }
-    
-    header h3, footer h3 {
-        font-size: 0.85rem;
-        margin: 2px 0;
-    }
-    
-    footer h4 {
-        font-size: 0.75rem;
-    }
-    
-    .tarjeta h2 {
-        font-size: 1.1rem;
-    }
-    
-    .tarjeta p {
-        font-size: 0.9rem;
-    }
-    
-    .social-icon {
-        width: 30px;
-        height: 30px;
-        font-size: 0.85rem;
-    }
+    display: flex;
+    gap:65px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.project-card{    
+    color:tomato;
+
+     width: 266px;  height: 266px;
+     padding: 22px;
+      border-radius: 22px;
+      border: 1px solid orange;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 22px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
+.texto{
+    color:white;
+}
+
+
+.project-card:hover{   
+   background-color: lightseagreen;
+   transform: rotate(-360deg);
+   transition: all 3s ease;
+   border: 1px solid green  ;
 }
