@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salud Digital</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="main-header">
+        <div class="logo">
+            <img src="AVP.png" alt="Logo AVP" class="logo-img">
+            <span class="logo-mark">AVP</span>
+            <span class="logo-text">Salud y Bienestar</span>
+        </div>
+    <nav class="main-nav">
+        <button class="nav-toggle" aria-label="Abrir menú">
+            ☰
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="Nutricion.html">Nutrición</a></li>
+            <li><a href="Ejercicio.html">Ejercicio</a></li>
+            <li><a href="Salud Mental.html">Salud mental</a></li>
+            <li><a href="Prevencion.html">Prevención</a></li>
+            <li><a href="Salud Digital.html">Salud digital</a></li>
+            <li><a href="Contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="page-header">
+        <h1>Salud Digital y tecnología En Salud</h1>
+        <p>
+            La salud digital integra aplicaciones móviles,dispositivos portátiles,telemedicina y herramientas
+            de monitoreo remoto para apoyar la prevención, el diagnóstico y el tratamiento.
+        </p>
+    </section>
+
+    <section class="page-grid">
+        <article class="page-card">
+            <h2>Aplicaciones y Wecnologías</h2>
+            <p>
+                Existen aplicaciones que permiten registrar la alimentación,el sueño,la actividad física y otros
+                indicadores de salud, lo que ayuda a tomar decisiones informadas sobre el estilo de vida.
+            </p>
+            <p>
+                Los wearables,como relojes inteligentes y pulseras de actividad,pueden medir ritmo cardíaco,
+                pasos diarios,niveles de oxígeno en sangre y calidad del sueño,ofreciendo reportes continuos.
+            </p>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="https://cloudfront-us-east-1.images.arcpublishing.com/copesa/P7BAT6OX22XJWKXDLUUDONWGOI.jpg"
+                         alt="Persona usando reloj inteligente">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkWA_oQIZ1hWDNZ9wM55WzfVcRU1Slb0kBNQ&s"
+                         alt="Persona usando una app de salud en su teléfono">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://www.enghousevideo.com/wp-content/uploads/2023/09/RPME.png"
+                         alt="Monitorización de salud en una tableta">
+                </div>
+            </div>
+        </article>
+
+        <div class="page-media">
+            <img src="https://curaesalud.com/wp-content/uploads/2024/02/Digital-nursing.jpg"
+                 alt="Profesional de salud usando tecnología digital">
+        </div>
+    </section>
+
+    <section class="page-grid">
+        <article class="page-card">
+            <h2>Telemedicina y Consultas En Línea</h2>
+            <p>
+                La telemedicina permite que pacientes y profesionales de la salud se conecten a través de videollamadas
+                y plataformas seguras,especialmente útil cuando el desplazamiento es complicado.
+            </p>
+            <p>
+                Aunque no reemplaza todas las consultas presenciales,es una herramienta valiosa para seguimiento,
+                orientación inicial y control de enfermedades crónicas en muchos casos.
+            </p>
+           
+            </div>
+        </article>
+
+        <article class="page-card">
+            <h2>Video Recomendado</h2>
+            <p>
+                Una introducción a cómo la tecnología está transformando la forma de brindar servicios de salud
+                en el mundo.
+            </p>
+            <div class="page-media">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/-96Cm-H6TDg?si=b0kOrOzAz9_8G34H" title="YouTube video player" frameborder="0"
+                 allowfullscreen></iframe>
+            </div>
+        </article>
+    </section>
+
+    <div class="back-home">
+        <a href="index.html" class="btn-secondary">← Volver al inicio</a>
+    </div>
+</main>
+
+<footer class="main-footer">
+    <div class="footer-links">
+        <a href="https://www.who.int/health-topics/digital-health" target="_blank" rel="noopener noreferrer">Digital-Health</a>
+    </div>
+    <p>Todos los derechos reservados: Armando Valera Paulino</p>
+</footer>
+
+<script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('nav-open');
+    });
+</script>
+</body>
+</html>
