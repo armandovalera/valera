@@ -1,4 +1,4 @@
-# 📝 Tarea 2: [Fuentes para una página web]
+# 📝 Tarea 2:Fuentes para una página web
 
 ## 🎯 Objetivo
 El objetivo de esta práctica es poner a prueba tus conocimientos de CSS. Deberás escribir los estilos necesarios para que la estructura del archivo `tarea2.html` se vea exactamente igual (o lo más parecido posible) al diseño original.
