@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fundamentos de CSS — Apuntes & Guía de Estudio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ─── RESET & BASE ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0d0f14;
+  --bg2:       #131620;
+  --bg3:       #1a1e2e;
+  --bg4:       #222740;
+  --surface:   #1e2235;
+  --border:    rgba(255,255,255,0.08);
+  --border2:   rgba(255,255,255,0.14);
+
+  --text:      #e8eaf2;
+  --text2:     #9aa0b8;
+  --text3:     #5f647e;
+
+  --accent:    #7c83ff;
+  --accent2:   #a5abff;
+  --teal:      #3ecfb2;
+  --coral:     #ff7c5c;
+  --amber:     #ffb547;
+  --pink:      #e96db0;
+  --green:     #5dd88a;
+
+  --code-bg:   #0a0c14;
+  --radius:    10px;
+  --radius-lg: 16px;
+
+  --font-display: 'DM Serif Display', serif;
+  --font-body:    'Outfit', sans-serif;
+  --font-mono:    'DM Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 15px;
+  overflow-x: hidden;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 3px; }
+
+/* ─── HEADER ─── */
+.site-header {
+  position: relative;
+  padding: 72px 24px 60px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% -10%, rgba(124,131,255,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 85% 50%, rgba(62,207,178,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.header-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  background: rgba(124,131,255,0.1);
+  border: 1px solid rgba(124,131,255,0.2);
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.site-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.site-header h1 em {
+  font-style: italic;
+  color: var(--accent2);
+}
+
+.site-header p {
+  color: var(--text2);
+  font-size: 1.05rem;
+  max-width: 520px;
+  margin: 0 auto 32px;
+  font-weight: 300;
+}
+
+.header-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.pill {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid;
+}
+.pill-purple { color: var(--accent2); border-color: rgba(124,131,255,0.3); background: rgba(124,131,255,0.07); }
+.pill-teal   { color: var(--teal);    border-color: rgba(62,207,178,0.3);  background: rgba(62,207,178,0.07); }
+.pill-coral  { color: var(--coral);   border-color: rgba(255,124,92,0.3);  background: rgba(255,124,92,0.07); }
+.pill-blue   { color: #79b8ff;        border-color: rgba(121,184,255,0.3); background: rgba(121,184,255,0.07); }
+.pill-amber  { color: var(--amber);   border-color: rgba(255,181,71,0.3);  background: rgba(255,181,71,0.07); }
+
+/* ─── LAYOUT ─── */
+.page-wrap { max-width: 860px; margin: 0 auto; padding: 0 20px 80px; }
+
+/* ─── SECTION DIVIDER ─── */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 52px 0 28px;
+}
+
+.section-title .line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.section-title h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.section-title .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ─── CATEGORY BADGE ─── */
+.cat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+/* ─── TOPIC CARD ─── */
+.topic-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 14px;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.topic-block:hover { border-color: var(--border2); }
+
+.topic-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.topic-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.topic-header-text { flex: 1; }
+.topic-title { font-size: 15px; font-weight: 600; color: var(--text); }
+.topic-subtitle { font-size: 12px; color: var(--text3); margin-top: 1px; font-family: var(--font-mono); }
+
+.topic-chevron {
+  color: var(--text3);
+  font-size: 11px;
+  transition: transform .25s;
+}
+.topic-block.open .topic-chevron { transform: rotate(180deg); }
+
+.topic-body {
+  display: none;
+  padding: 0 20px 20px;
+  border-top: 1px solid var(--border);
+}
+.topic-block.open .topic-body { display: block; }
+
+/* ─── PROSE INSIDE TOPIC ─── */
+.topic-body p { color: var(--text2); font-size: 14px; line-height: 1.75; margin-top: 14px; }
+.topic-body strong { color: var(--text); font-weight: 600; }
+.topic-body ul { margin-top: 10px; padding-left: 18px; }
+.topic-body li { color: var(--text2); font-size: 14px; line-height: 1.7; margin-bottom: 4px; }
+.topic-body li strong { color: var(--text); }
+
+/* ─── CODE BLOCKS ─── */
+.code-block {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-top: 12px;
+  overflow-x: auto;
+}
+
+.code-block pre {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  color: #c9d1d9;
+  white-space: pre;
+}
+
+.c-prop    { color: #79b8ff; }
+.c-value   { color: #85e89d; }
+.c-string  { color: #f9c74f; }
+.c-comment { color: #586069; font-style: italic; }
+.c-sel     { color: #e96db0; }
+.c-unit    { color: #ff7c5c; }
+.c-fn      { color: #b392f0; }
+
+/* inline code */
+code {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  background: rgba(124,131,255,0.1);
+  color: var(--accent2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(124,131,255,0.15);
+}
+
+/* ─── ALERT / TIP ─── */
+.tip {
+  display: flex;
+  gap: 10px;
+  background: rgba(255,181,71,0.07);
+  border: 1px solid rgba(255,181,71,0.2);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  margin-top: 12px;
+}
+.tip-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+.tip p { margin-top: 0 !important; color: rgba(255,181,71,0.9) !important; font-size: 13px !important; }
+
+.trap {
+  display: flex;
+  gap: 10px;
+  background: rgba(255,124,92,0.07);
+  border: 1px solid rgba(255,124,92,0.2);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  margin-top: 12px;
+}
+.trap p { margin-top: 0 !important; color: rgba(255,124,92,0.9) !important; font-size: 13px !important; }
+
+/* ─── PROPERTY TABLE ─── */
+.prop-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+  font-size: 13px;
+}
+.prop-table th {
+  text-align: left;
+  padding: 8px 12px;
+  background: var(--bg3);
+  color: var(--text3);
+  font-weight: 500;
+  letter-spacing: .04em;
+  font-size: 11px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+.prop-table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.prop-table tr:last-child td { border-bottom: none; }
+.prop-table tr:hover td { background: rgba(255,255,255,0.02); }
+.prop-table td:first-child { font-family: var(--font-mono); font-size: 12px; color: var(--accent2); }
+.prop-table td:nth-child(2) { color: var(--text2); }
+.prop-table td:nth-child(3) { color: var(--text3); font-family: var(--font-mono); font-size: 12px; }
+
+/* ─── BOX MODEL VISUAL ─── */
+.box-model-vis {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+.bm-margin {
+  background: rgba(255,181,71,0.08);
+  border: 2px dashed rgba(255,181,71,0.35);
+  border-radius: 8px;
+  padding: 18px;
+  text-align: center;
+  position: relative;
+}
+.bm-border {
+  background: rgba(255,124,92,0.08);
+  border: 2px solid rgba(255,124,92,0.5);
+  border-radius: 6px;
+  padding: 18px;
+}
+.bm-padding {
+  background: rgba(93,216,138,0.08);
+  border: 2px dashed rgba(93,216,138,0.35);
+  border-radius: 4px;
+  padding: 18px;
+}
+.bm-content {
+  background: rgba(124,131,255,0.15);
+  border: 1px solid rgba(124,131,255,0.3);
+  border-radius: 3px;
+  padding: 12px 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent2);
+}
+.bm-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.lbl-margin { color: var(--amber); }
+.lbl-border { color: var(--coral); }
+.lbl-padding { color: var(--green); }
+.lbl-content { color: var(--accent2); }
+
+/* ─── FLEX VISUAL ─── */
+.flex-demo {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.flex-item {
+  background: rgba(124,131,255,0.15);
+  border: 1px solid rgba(124,131,255,0.3);
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--accent2);
+}
+.flex-demo.jc-between { justify-content: space-between; }
+.flex-demo.jc-center  { justify-content: center; }
+.flex-demo.jc-around  { justify-content: space-around; }
+
+/* ─── PSEUDOCLASS TABLE ─── */
+.pseudo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
+@media (max-width: 500px) { .pseudo-grid { grid-template-columns: 1fr; } }
+
+.pseudo-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+}
+.pseudo-name {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.pseudo-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
+/* ─── TRANSFORM DEMO ─── */
+.transform-demos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+}
+.transform-box {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+  flex: 1;
+  min-width: 120px;
+}
+.transform-box .shape {
+  width: 40px; height: 40px;
+  background: rgba(124,131,255,0.25);
+  border: 2px solid var(--accent);
+  border-radius: 6px;
+  margin: 0 auto 10px;
+  transition: transform .3s ease;
+}
+.transform-box:hover .shape-rotate  { transform: rotate(45deg); }
+.transform-box:hover .shape-scale   { transform: scale(1.4); }
+.transform-box:hover .shape-trans   { transform: translateX(12px); }
+.transform-box:hover .shape-circle  { transform: scale(1); border-radius: 50%; }
+.transform-box .t-label { font-size: 11px; color: var(--text3); font-family: var(--font-mono); }
+
+/* ─── DIVIDER ─── */
+.hr { height: 1px; background: var(--border); margin: 40px 0; }
+
+/* ─── ════════════════════════ GUÍA ════════════════════════ ─── */
+.guide-header {
+  text-align: center;
+  padding: 52px 0 36px;
+  position: relative;
+}
+.guide-header::before {
+  content: '';
+  position: absolute;
+  left: 50%; top: 0;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 48px;
+  background: linear-gradient(to bottom, transparent, var(--border2));
+}
+.guide-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 400;
+}
+.guide-header h2 em { font-style: italic; color: var(--teal); }
+.guide-header p { color: var(--text2); font-weight: 300; max-width: 420px; margin: 10px auto 0; font-size: 14px; }
+
+/* ─── GUIDE NAV ─── */
+.guide-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 28px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 8px;
+}
+.guide-nav button {
+  flex: 1;
+  min-width: 100px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text2);
+  transition: all .15s;
+}
+.guide-nav button.active {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border2);
+}
+.guide-nav button:hover:not(.active) { color: var(--text); background: rgba(255,255,255,0.04); }
+
+.guide-section { display: none; }
+.guide-section.active { display: block; }
+
+/* ─── EXEC SUMMARY ─── */
+.exec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+@media (max-width: 560px) { .exec-grid { grid-template-columns: 1fr; } }
+
+.exec-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.exec-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+.ec-purple::before { background: var(--accent); }
+.ec-teal::before   { background: var(--teal); }
+.ec-coral::before  { background: var(--coral); }
+.ec-blue::before   { background: #79b8ff; }
+.ec-amber::before  { background: var(--amber); grid-column: 1/-1; }
+
+.exec-num {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 8px;
+  opacity: .25;
+}
+.exec-card h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.exec-card p  { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ─── GLOSARIO ─── */
+.glosario-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.gf-btn {
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border2);
+  background: transparent;
+  color: var(--text2);
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: all .15s;
+}
+.gf-btn.active, .gf-btn:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.glos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+}
+
+.glos-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  transition: border-color .15s;
+}
+.glos-card:hover { border-color: var(--border2); }
+.glos-term {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.glos-def { font-size: 12px; color: var(--text2); line-height: 1.5; }
+.glos-card[data-cat="tipo"]   .glos-term { color: var(--accent2); }
+.glos-card[data-cat="color"]  .glos-term { color: var(--teal); }
+.glos-card[data-cat="box"]    .glos-term { color: var(--coral); }
+.glos-card[data-cat="flex"]   .glos-term { color: #79b8ff; }
+.glos-card[data-cat="inter"]  .glos-term { color: var(--amber); }
+.glos-card.hidden { display: none; }
+
+/* ─── QUIZ ─── */
+.score-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+.score-num { font-family: var(--font-display); font-size: 2rem; color: var(--teal); min-width: 52px; }
+.score-label { font-size: 13px; color: var(--text2); }
+.score-prog { flex: 1; background: var(--bg4); border-radius: 4px; height: 6px; overflow: hidden; }
+.score-fill { height: 100%; background: var(--teal); border-radius: 4px; transition: width .4s ease; }
+
+.q-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin-bottom: 14px;
+}
+.q-meta { font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.q-text { font-size: 15px; color: var(--text); line-height: 1.6; margin-bottom: 14px; font-weight: 500; }
+.q-opts { display: flex; flex-direction: column; gap: 6px; }
+
+.q-opt {
+  font-size: 13px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border2);
+  background: var(--bg3);
+  color: var(--text2);
+  cursor: pointer;
+  transition: all .12s;
+  font-family: var(--font-body);
+  text-align: left;
+}
+.q-opt:hover:not(.disabled) { background: var(--bg4); color: var(--text); border-color: rgba(255,255,255,0.2); }
+.q-opt.correct { background: rgba(62,207,178,0.1); border-color: rgba(62,207,178,0.4); color: var(--teal); }
+.q-opt.wrong   { background: rgba(255,124,92,0.1);  border-color: rgba(255,124,92,0.4);  color: var(--coral); }
+.q-opt.disabled { cursor: default; }
+
+.q-exp {
+  display: none;
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--text2);
+  background: var(--bg3);
+  border-radius: 8px;
+  padding: 10px 14px;
+  line-height: 1.6;
+  border-left: 3px solid var(--teal);
+}
+.q-exp.show { display: block; }
+.q-exp strong { color: var(--text); }
+
+.q-open textarea {
+  width: 100%;
+  margin-top: 8px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text);
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.6;
+}
+.q-open textarea:focus { outline: none; border-color: rgba(124,131,255,0.4); }
+
+.reveal-btn {
+  margin-top: 8px;
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border2);
+  background: transparent;
+  color: var(--text3);
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: all .12s;
+}
+.reveal-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+/* ─── FOOTER ─── */
+.site-footer {
+  text-align: center;
+  padding: 28px;
+  border-top: 1px solid var(--border);
+  color: var(--text3);
+  font-size: 12px;
+  margin-top: 40px;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  .site-header { padding: 48px 16px 40px; }
+  .guide-nav button { font-size: 12px; min-width: 80px; }
+  .exec-card.ec-amber { grid-column: 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     SITE HEADER
+════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-eyebrow">⚡ Material de Estudio</div>
+  <h1>Fundamentos de <em>CSS</em></h1>
+  <p>Apuntes completos + guía de estudio interactiva para dominar el cuestionario evaluativo.</p>
+  <div class="header-pills">
+    <span class="pill pill-purple">🔤 Tipografía</span>
+    <span class="pill pill-teal">🎨 Color & Fondo</span>
+    <span class="pill pill-coral">📦 Modelo de Caja</span>
+    <span class="pill pill-blue">⚙️ Flexbox</span>
+    <span class="pill pill-amber">✨ Interactividad</span>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════
+     APUNTES
+════════════════════════════════════════════ -->
+<main class="page-wrap">
+
+  <div class="section-title">
+    <div class="line"></div>
+    <h2>📚 Apuntes por Categoría</h2>
+    <div class="line"></div>
+  </div>
+  <p style="color:var(--text2); font-size:14px; text-align:center; margin-bottom:28px;">Haz clic en cada tema para expandir la explicación completa. Estudia cada sección antes de pasar a la guía.</p>
+
+  <!-- ── CATEGORÍA 1: TIPOGRAFÍA ── -->
+  <div style="margin-bottom:8px;">
+    <div class="cat-badge pill-purple" style="background:rgba(124,131,255,0.1); color:var(--accent2); border:1px solid rgba(124,131,255,0.25);">🔤 Categoría 1 — Tipografía </div>
+  </div>
+
+  <!-- font-family -->
+  <div class="topic-block open" id="t1">
+    <div class="topic-header" onclick="toggleBlock('t1')">
+      <div class="topic-icon" style="background:rgba(124,131,255,0.12);">🔤</div>
+      <div class="topic-header-text">
+        <div class="topic-title">font-family — Tipo de fuente</div>
+        <div class="topic-subtitle">font-family: 'Nombre', genérica;</div>
+      </div>
+      <span class="topic-chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <p><strong>¿Qué hace?</strong> Define la familia tipográfica (fuente) que se aplicará al texto del elemento.</p>
+      <p><strong>Sintaxis:</strong> Se escriben los nombres de fuente separados por comas. Si el nombre tiene espacios, va entre comillas. Al final siempre se coloca una <em>fuente genérica de respaldo</em> (<code>sans-serif</code>, <code>serif</code>, <code>monospace</code>) por si la principal no carga.</p>
+      <div class="code-block"><pre><span class="c-comment">/* Fuente del sistema con respaldo */</span>
+<span class="c-sel">body</span> {
+  <span class="c-prop">font-family</span>: <span class="c-string">'Georgia'</span>, serif;
+}
+
+<span class="c-comment">/* Google Font con respaldo (buena práctica) */</span>
+<span class="c-sel">h1</span> {
+  <span class="c-prop">font-family</span>: <span class="c-string">'Roboto'</span>, <span class="c-string">'Helvetica Neue'</span>, sans-serif;
+}
+
+<span class="c-comment">/* Importar Google Font al inicio del CSS */</span>
+<span class="c-fn">@import</span> <span class="c-fn">url</span>(<span class="c-string">'https://fonts.googleapis.com/css2?family=Roboto'</span>);</pre></div>
+      <div class="tip"><div class="tip-icon">💡</div><p>Las comillas en el nombre de la fuente son <strong>buena convención</strong>, especialmente si el nombre tiene espacios (ej: <code>'Open Sans'</code>). La fuente genérica al final es el seguro si la principal falla.</p></div>
+      <div class="trap"><div class="tip-icon">⚠️</div><p>Propiedades inválidas que NO existen: <code>text-font</code>, <code>font-type</code>. Solo existe <code>font-family</code>.</p></div>
+    </div>
+  </div>
+
+  <!-- font-weight -->
+  <div class="topic-block" id="t2">
+    <div class="topic-header" onclick="toggleBlock('t2')">
+      <div class="topic-icon" style="background:rgba(124,131,255,0.12);">⚖️</div>
+      <div class="topic-header-text">
+        <div class="topic-title">font-weight — Grosor del texto</div>
+        <div class="topic-subtitle">font-weight: bold | 400 | 700;</div>
+      </div>
+      <span class="topic-chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <p><strong>¿Qué hace?</strong> Controla el grosor o "peso" visual de los caracteres del texto.</p>
+      <table class="prop-table">
+        <tr><th>Valor</th><th>Significado</th><th>Equivalente</th></tr>
+        <tr><td>100–300</td><td>Texto delgado (thin, light)</td><td>light</td></tr>
+        <tr><td>400</td><td>Texto normal</td><td>normal</td></tr>
+        <tr><td>700</td><td>Texto en negrita</td><td>bold</td></tr>
+        <tr><td>900</td><td>Texto extra grueso</td><td>black</td></tr>
+      </table>
+      <div class="code-block"><pre><span class="c-sel">p</span>     { <span class="c-prop">font-weight</span>: <span class="c-value">400</span>; }    <span class="c-comment">/* normal */</span>
+<span class="c-sel">strong</span> { <span class="c-prop">font-weight</span>: <span class="c-value">bold</span>; }   <span class="c-comment">/* = 700 */</span>
+<span class="c-sel">h1</span>    { <span class="c-prop">font-weight</span>: <span class="c-value">700</span>; }    <span class="c-comment">/* = bold */</span></pre></div>
+      <div class="trap"><div class="tip-icon">⚠️</div><p>No existe <code>font-style: bold</code> ni <code>text-weight</code>. El grosor siempre es <code>font-weight</code>. <code>font-style</code> es para cursiva (<code>italic</code>).</p></div>
+    </div>
+  </div>
+
+  <!-- text-decoration & text-align -->
+  <div class="topic-block" id="t3">
+    <div class="topic-header" onclick="toggleBlock('t3')">
+      <div class="topic-icon" style="background:rgba(124,131,255,0.12);">✏️</div>
+      <div class="topic-header-text">
+        <div class="topic-title">text-decoration & text-align</div>
+        <div class="topic-subtitle">subrayado, tachado, alineación</div>
+      </div>
+      <span class="topic-chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <p><strong>text-decoration</strong> añade o elimina adornos visuales al texto.</p>
+      <p><strong>text-align</strong> controla la alineación horizontal del texto dentro de su bloque.</p>
+      <div class="code-block"><pre><span class="c-comment">/* Eliminar subrayado de enlace */</span>
+<span class="c-sel">a</span> {
+  <span class="c-prop">text-decoration</span>: <span class="c-value">none</span>;
+}
+
+<span class="c-comment">/* Subrayar texto */</span>
+<span class="c-sel">.subrayado</span> {
+  <span class="c-prop">text-decoration</span>: <span class="c-value">underline</span>;
+}
+
+<span class="c-comment">/* Centrar texto en su contenedor */</span>
+<span class="c-sel">.centrado</span> {
+  <span class="c-prop">text-align</span>: <span class="c-value">center</span>;  <span class="c-comment">/* left | right | center | justify */</span>
+}</pre></div>
+      <div class="tip"><div class="tip-icon">💡</div><p>Para un enlace elegante que además esté centrado, necesitas <strong>dos propiedades</strong>: <code>text-decoration: none;</code> + <code>text-align: center;</code></p></div>
+    </div>
+  </div>
+
+  <!-- letter-spacing -->
+  <div class="topic-block" id="t4">
+    <div class="topic-header" onclick="toggleBlock('t4')">
+      <div class="topic-icon" style="background:rgba(124,131,255,0.12);">↔️</div>
+      <div class="topic-header-text">
+        <div class="topic-title">letter-spacing & word-spacing</div>
+        <div class="topic-subtitle">espacio entre letras y palabras</div>
+      </div>
+      <span class="topic-chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <table class="prop-table">
+        <tr><th>Propiedad</th><th>Controla</th><th>Ejemplo</th></tr>
+        <tr><td>letter-spacing</td><td>Espacio entre caracteres individuales</td><td>letter-spacing: 2px</td></tr>
+        <tr><td>word-spacing</td><td>Espacio entre palabras completas</td><td>word-spacing: 8px</td></tr>
+        <tr><td>line-height</td><td>Espacio entre líneas de texto</td><td>line-height: 1.6</td></tr>
+      </table>
+      <div class="code-block"><pre><span class="c-sel">h1</span> {
+  <span class="c-prop">letter-spacing</span>: <span class="c-value">3px</span>;   <span class="c-comment">/* T  I  T  U  L  O */</span>
+}
+<span class="c-sel">p</span> {
+  <span class="c-prop">word-spacing</span>: <span class="c-value">6px</span>;     <span class="c-comment">/* palabra  separada  por  espacio */</span>
+  <span class="c-prop">line-height</span>: <span class="c-value">1.6</span>;     <span class="c-comment">/* 1.6 × tamaño de fuente */</span>
+}</pre></div>
+    </div>
+  </div>
+
+  <!-- ── CATEGORÍA 2: COLOR Y FONDO ── -->
+  <div style="margin:28px 0 8px;">
+    <div class="cat-badge" style="background:rgba(62,207,178,0.1); color:var(--teal); border:1px solid rgba(62,207,178,0.25);">🎨 Categoría 2 — Color y Fondo· </div>
+  </div>
+
+  <!-- color vs background-color -->
+  <div class="topic-block" id="t5">
+    <div class="topic-header" onclick="toggleBlock('t5')">
+      <div class="topic-icon" style="background:rgba(62,207,178,0.12);">🎨</div>
+      <div class="topic-header-text">
+        <div class="topic-title">color vs background-color</div>
+        <div class="topic-subtitle">texto vs fondo del elemento</div>
+      </div>
+      <span class="topic-chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <p><strong>color</strong> define el color del texto (y decoraciones de texto) del elemento.</p>
+      <p><strong>background-color</strong> pinta el área de fondo que ocupa el elemento según su modelo de caja.</p>
+      <div class="code-block"><pre><span class="c-sel">.tarjeta</span> {
+  <span class="c-prop">color</span>: <span class="c-value">#ffffff</span>;            <span class="c-comment">/* texto blanco */</span>
+  <span class="c-prop">background-color</span>: <span class="c-value">#1a1a2e</span>; <span class="c-comment">/* fondo azul oscuro */</span>
+}
+
+<span class="c-comment">/* Formatos de color aceptados */</span>
+<span class="c-prop">color</span>: <span class="c-value">red</span>;              <span class="c-comment">/* nombre */</span>
+<span class="c-prop">color</span>: <span class="c-value">#FF5733</span>;         <span class="c-comment">/* hexadecimal */</span>
+<span class="c-prop">color</span>: <span class="c-fn">rgb</span>(<span class="c-value">255</span>,<span class="c-value">87</span>,<span class="c-value">51</span>);   <span class="c-comment">/* RGB */</span>
+<span class="c-prop">color</span>: <span class="c-fn">rgba</span>(<span class="c-value">255</span>,<span class="c-value">87</span>,<span class="c-value">51</span>,<span class="c-value">0.5</span>); <span class="c-comment">/* RGBA con opacidad */</span></pre></div>
+      <div class="tip"><div class="tip-icon">💡</div><p>El <strong>hexadecimal</strong> siempre empieza con <code>#</code> seguido de 6 caracteres (o 3 en formato abreviado). Ejemplo válido: <code>#FF5733</code>.</p></div>
+    </div>
+  </div>
+
+  <!-- linear-gradient -->
+  <div class="topic-block" id="t6">
+    <div class="topic-header" onclick="toggleBlock('t6')">
+      <div class="topic-icon" style="background:rgba(62,207,178,0.12);">🌈</div>
+      <div class="topic-header-text">
+        <div class="topic-title">linear-gradient — Fondos degradados</div>
+        <div class="topic-subtitle">background-image: linear-gradient(...);</div>
+      </div>
+      <span class="topic-chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <p>Los degradados CSS son <strong>imágenes generadas dinámicamente</strong>, por eso se aplican con <code>background-image</code>, no con <code>background-color</code>.</p>
+      <div class="code-block"><pre><span class="c-comment">/* De arriba a abajo: rojo → azul */</span>
+<span class="c-sel">div</span> {
+  <span class="c-prop">background-image</span>: <span class="c-fn">linear-gradient</span>(<span class="c-value">to bottom</span>, <span class="c-value">red</span>, <span class="c-value">blue</span>);
+}
+
+<span class="c-comment">/* De izquierda a derecha */</span>
+<span class="c-sel">div</span> {
+  <span class="c-prop">background-image</span>: <span class="c-fn">linear-gradient</span>(<span class="c-value">to right</span>, <span class="c-string">#ff0000</span>, <span class="c-string">#0000ff</span>);
+}
+
+<span class="c-comment">/* En diagonal a 45 grados */</span>
+<span class="c-sel">div</span> {
+  <span class="c-prop">background-image</span>: <span class="c-fn">linear-gradient</span>(<span class="c-value">45deg</span>, <span class="c-value">red</span>, <span class="c-value">blue</span>);
+}
+
+<span class="c-comment">/* Forma abreviada también válida */</span>
+<span class="c-sel">div</span> {
+  <span class="c-prop">background</span>: <span class="c-fn">linear-gradient</span>(<span class="c-value">to right</span>, <span class="c-value">red</span>, <span class="c-value">blue</span>);
+}</pre></div>
+      <div class="trap"><div class="tip-icon">⚠️</div><p><code>background-color: linear-gradient()</code> NO funciona. Los degradados son imágenes → siempre <code>background-image</code> o <code>background</code>.</p></div>
+    </div>
+  </div>
+
+  <!-- ── CATEGORÍA 3: MODELO DE CAJA ── -->
+  <div style="margin:28px 0 8px;">
+    <div class="cat-badge" style="background:rgba(255,124,92,0.1); color:var(--coral); border:1px solid rgba(255,124,92,0.25);">📦 Categoría 3 — Modelo de Caja· </div>
+  </div>
+
+  <!-- margin y padding -->
+  <div class="topic-block" id="t7">
+    <div class="topic-header" onclick="toggleBlock('t7')">
+      <div class="topic-icon" style="background:rgba(255,124,92,0.12);">📐</div>
+      <div class="topic-header-text">
+        <div class="topic-title">margin & padding — El Box Model</div>
+        <div class="topic-subtitle">espacio exterior vs interior</div>
+      </div>
+      <span class="topic-chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <p><strong>El modelo de caja</strong> describe cómo cada elemento HTML ocupa espacio. Tiene 4 capas concéntricas:</p>
+
+      <div class="box-model-vis">
+        <div class="bm-margin">
+          <div class="bm-label lbl-margin">margin (exterior)</div>
+          <div class="bm-border">
+            <div class="bm-label lbl-border">border</div>
+            <div class="bm-padding">
+              <div class="bm-label lbl-padding">padding (interior)</div>
+              <div class="bm-content">contenido</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-block"><pre><span class="c-comment">/* Valores individuales */</span>
+<span class="c-sel">.caja</span> {
+  <span class="c-prop">margin-top</span>:    <span class="c-unit">20px</span>;
+  <span class="c-prop">margin-right</span>:  <span class="c-unit">10px</span>;
+  <span class="c-prop">margin-bottom</span>: <span class="c-unit">20px</span>;
+  <span class="c-prop">margin-left</span>:   <span class="c-unit">10px</span>;
+}
+
+<span class="c-comment">/* Shorthand: top  right  bottom  left  (sentido horario) */</span>
+<span class="c-sel">.caja</span> { <span class="c-prop">margin</span>: <span class="c-unit">20px 10px 20px 10px</span>; }
+
+<span class="c-comment">/* Shorthand con 2 valores: vertical  horizontal */</span>
+<span class="c-sel">.caja</span> { <span class="c-prop">margin</span>: <span class="c-unit">20px 10px</span>; }
+
+<span class="c-comment">/* Centrar horizontalmente un elemento con ancho definido */</span>
+<span class="c-sel">.centrado</span> { <span class="c-prop">margin</span>: <span class="c-value">0 auto</span>; <span class="c-prop">max-width</span>: <span class="c-unit">800px</span>; }</pre></div>
+
+      <div class="tip"><div class="tip-icon">💡</div><p>Regla mnemotécnica para los 4 valores: <strong>TRouBLe</strong> → <strong>T</strong>op <strong>R</strong>ight <strong>B</strong>ottom <strong>L</strong>eft. Siempre en sentido horario.</p></div>
+    </div>
+  </div>
+
+  <!-- border, border-radius, box-shadow -->
+  <div class="topic-block" id="t8">
+    <div class="topic-header" onclick="toggleBlock('t8')">
+      <div class="topic-icon" style="background:rgba(255,124,92,0.12);">⬜</div>
+      <div class="topic-header-text">
+        <div class="topic-title">border, border-radius & box-shadow</div>
+        <div class="topic-subtitle">bordes, esquinas y sombras</div>
+      </div>
+      <span class="topic-chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <div class="code-block"><pre><span class="c-comment">/* border shorthand: grosor estilo color */</span>
+<span class="c-sel">.caja</span> {
+  <span class="c-prop">border</span>: <span class="c-unit">2px</span> <span class="c-value">solid</span> <span class="c-value">red</span>;
+}
+
+<span class="c-comment">/* border-radius: redondear esquinas */</span>
+<span class="c-sel">.redondeado</span> { <span class="c-prop">border-radius</span>: <span class="c-unit">10px</span>; }
+<span class="c-sel">.circulo</span>    { <span class="c-prop">border-radius</span>: <span class="c-unit">50%</span>; }   <span class="c-comment">/* cuadrado → círculo */</span>
+
+<span class="c-comment">/* box-shadow: offset-x  offset-y  blur  color */</span>
+<span class="c-sel">.sombra</span> {
+  <span class="c-prop">box-shadow</span>: <span class="c-unit">5px</span> <span class="c-unit">10px</span> <span class="c-unit">15px</span> <span class="c-fn">rgba</span>(<span class="c-value">0</span>,<span class="c-value">0</span>,<span class="c-value">0</span>,<span class="c-value">0.5</span>);
+  <span class="c-comment">/*          ^^^  ^^^   ^^^</span>
+  <span class="c-comment">           horiz vert  BLUR ← 3er valor es desenfoque */</span>
+}</pre></div>
+      <div class="tip"><div class="tip-icon">💡</div><p>En <code>box-shadow</code>: 1° offset-x, 2° offset-y, <strong>3° blur (desenfoque)</strong>, 4° spread (expansión opcional), 5° color. El tercer valor es el blur.</p></div>
+    </div>
+  </div>
+
+  <!-- max-width -->
+  <div class="topic-block" id="t9">
+    <div class="topic-header" onclick="toggleBlock('t9')">
+      <div class="topic-icon" style="background:rgba(255,124,92,0.12);">📏</div>
+      <div class="topic-header-text">
+        <div class="topic-title">max-width — Diseño responsivo</div>
+        <div class="topic-subtitle">max-width: 100% en imágenes</div>
+      </div>
+      <span class="topic-chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <p><code>max-width</code> establece el ancho máximo que puede alcanzar un elemento. Si el contenedor es más pequeño, el elemento se reduce. Si es más grande, el elemento no supera su max-width.</p>
+      <div class="code-block"><pre><span class="c-comment">/* Imagen responsiva (buena práctica) */</span>
+<span class="c-sel">img</span> {
+  <span class="c-prop">max-width</span>: <span class="c-unit">100%</span>;   <span class="c-comment">/* ✅ Se adapta, nunca se estira */</span>
+  <span class="c-prop">height</span>: <span class="c-value">auto</span>;      <span class="c-comment">/* mantiene proporciones */</span>
+}
+
+<span class="c-comment">/* width: 100% fuerza siempre el 100% del contenedor */</span>
+<span class="c-sel">img</span> {
+  <span class="c-prop">width</span>: <span class="c-unit">100%</span>;        <span class="c-comment">/* ⚠️ Puede pixelar si el contenedor es grande */</span>
+}</pre></div>
+      <div class="tip"><div class="tip-icon">💡</div><p><code>max-width: 100%</code> es la <strong>mejor práctica</strong> para imágenes porque: si el contenedor es más pequeño, la imagen se reduce; si es más grande, la imagen mantiene su tamaño original sin pixelarse.</p></div>
+    </div>
+  </div>
+
+  <!-- ── CATEGORÍA 4: DISPLAY Y FLEXBOX ── -->
+  <div style="margin:28px 0 8px;">
+    <div class="cat-badge" style="background:rgba(121,184,255,0.1); color:#79b8ff; border:1px solid rgba(121,184,255,0.25);">⚙️ Categoría 4 — Display y Flexbox·</div>
+  </div>
+
+  <!-- display flex -->
+  <div class="topic-block" id="t10">
+    <div class="topic-header" onclick="toggleBlock('t10')">
+      <div class="topic-icon" style="background:rgba(121,184,255,0.12);">⬛</div>
+      <div class="topic-header-text">
+        <div class="topic-title">display: flex — Contenedor flexible</div>
+        <div class="topic-subtitle">organización horizontal por defecto</div>
+      </div>
+      <span class="topic-chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <p>Al aplicar <code>display: flex</code> a un contenedor, sus hijos directos se convierten en <strong>elementos flex</strong> organizados en fila horizontal por defecto.</p>
+      <div class="code-block"><pre><span class="c-sel">.contenedor</span> {
+  <span class="c-prop">display</span>: <span class="c-value">flex</span>;               <span class="c-comment">/* activa flexbox */</span>
+  <span class="c-prop">flex-direction</span>: <span class="c-value">row</span>;         <span class="c-comment">/* por defecto: fila */</span>
+  <span class="c-prop">justify-content</span>: <span class="c-value">flex-start</span>; <span class="c-comment">/* por defecto: inicio */</span>
+  <span class="c-prop">align-items</span>: <span class="c-value">stretch</span>;        <span class="c-comment">/* por defecto: estirar */</span>
+}</pre></div>
+
+      <p style="margin-top:16px; margin-bottom:8px;"><strong>justify-content</strong> — distribuye los elementos en el eje horizontal:</p>
+      <p style="font-size:13px; color:var(--text3); margin-bottom:4px;">space-between:</p>
+      <div class="flex-demo jc-between">
+        <div class="flex-item">Item 1</div>
+        <div class="flex-item">Item 2</div>
+        <div class="flex-item">Item 3</div>
+      </div>
+      <p style="font-size:13px; color:var(--text3); margin-top:10px; margin-bottom:4px;">center:</p>
+      <div class="flex-demo jc-center">
+        <div class="flex-item">Item 1</div>
+        <div class="flex-item">Item 2</div>
+        <div class="flex-item">Item 3</div>
+      </div>
+      <p style="font-size:13px; color:var(--text3); margin-top:10px; margin-bottom:4px;">space-around:</p>
+      <div class="flex-demo jc-around">
+        <div class="flex-item">Item 1</div>
+        <div class="flex-item">Item 2</div>
+        <div class="flex-item">Item 3</div>
+      </div>
+
+      <div class="code-block" style="margin-top:14px;"><pre><span class="c-comment">/* Los valores más usados de justify-content */</span>
+<span class="c-prop">justify-content</span>: <span class="c-value">center</span>;        <span class="c-comment">/* agrupa en el centro */</span>
+<span class="c-prop">justify-content</span>: <span class="c-value">space-between</span>; <span class="c-comment">/* extremos pegados a bordes */</span>
+<span class="c-prop">justify-content</span>: <span class="c-value">space-around</span>;  <span class="c-comment">/* espacio alrededor de cada uno */</span>
+<span class="c-prop">justify-content</span>: <span class="c-value">space-evenly</span>;  <span class="c-comment">/* espacio perfectamente igual */</span></pre></div>
+    </div>
+  </div>
+
+  <!-- flex-wrap y gap -->
+  <div class="topic-block" id="t11">
+    <div class="topic-header" onclick="toggleBlock('t11')">
+      <div class="topic-icon" style="background:rgba(121,184,255,0.12);">🔁</div>
+      <div class="topic-header-text">
+        <div class="topic-title">flex-wrap & gap</div>
+        <div class="topic-subtitle">salto de línea y espacio entre elementos</div>
+      </div>
+      <span class="topic-chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <p><strong>flex-wrap: wrap</strong> permite que los elementos flex salten a una nueva línea cuando no hay suficiente espacio en el contenedor. Por defecto es <code>nowrap</code> (todo en una sola fila).</p>
+      <p><strong>gap</strong> define el espacio entre los elementos hijos, tanto en filas como columnas. Solo actúa <em>entre</em> elementos, no en los bordes exteriores.</p>
+      <div class="code-block"><pre><span class="c-sel">.grid-tarjetas</span> {
+  <span class="c-prop">display</span>: <span class="c-value">flex</span>;
+  <span class="c-prop">flex-wrap</span>: <span class="c-value">wrap</span>;     <span class="c-comment">/* salta a nueva fila si no hay espacio */</span>
+  <span class="c-prop">gap</span>: <span class="c-unit">20px</span>;           <span class="c-comment">/* espacio entre items (filas y columnas) */</span>
+  <span class="c-prop">gap</span>: <span class="c-unit">16px 24px</span>;    <span class="c-comment">/* gap-row gap-column (también válido) */</span>
+}
+
+<span class="c-comment">/* Ventaja de gap vs margin: */</span>
+<span class="c-comment">/* margin afecta los 4 lados → bordes exteriores indeseados */</span>
+<span class="c-comment">/* gap solo actúa ENTRE elementos → diseño más limpio */</span></pre></div>
+    </div>
+  </div>
+
+  <!-- ── CATEGORÍA 5: INTERACTIVIDAD ── -->
+  <div style="margin:28px 0 8px;">
+    <div class="cat-badge" style="background:rgba(255,181,71,0.1); color:var(--amber); border:1px solid rgba(255,181,71,0.25);">✨ Categoría 5 — Interactividad · </div>
+  </div>
+
+  <!-- pseudoclases -->
+  <div class="topic-block" id="t12">
+    <div class="topic-header" onclick="toggleBlock('t12')">
+      <div class="topic-icon" style="background:rgba(255,181,71,0.12);">🖱️</div>
+      <div class="topic-header-text">
+        <div class="topic-title">Pseudoclases de estado</div>
+        <div class="topic-subtitle">:hover · :active · :focus · :visited</div>
+      </div>
+      <span class="topic-chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <p>Las pseudoclases permiten aplicar estilos según el <strong>estado interactivo</strong> del elemento.</p>
+      <div class="pseudo-grid">
+        <div class="pseudo-card">
+          <div class="pseudo-name" style="color:var(--amber);">:hover</div>
+          <div class="pseudo-desc">Se activa cuando el cursor del mouse está encima del elemento. La más usada para efectos interactivos.</div>
+        </div>
+        <div class="pseudo-card">
+          <div class="pseudo-name" style="color:var(--coral);">:active</div>
+          <div class="pseudo-desc">Se activa mientras el usuario mantiene el clic presionado sobre el elemento.</div>
+        </div>
+        <div class="pseudo-card">
+          <div class="pseudo-name" style="color:#79b8ff;">:focus</div>
+          <div class="pseudo-desc">Se activa cuando el elemento recibe el foco, generalmente por teclado (Tab) o clic en inputs.</div>
+        </div>
+        <div class="pseudo-card">
+          <div class="pseudo-name" style="color:var(--pink);">:visited</div>
+          <div class="pseudo-desc">Se aplica a enlaces que el navegador registra que el usuario ya ha visitado previamente.</div>
+        </div>
+      </div>
+      <div class="code-block" style="margin-top:14px;"><pre><span class="c-sel">.boton</span> {
+  <span class="c-prop">background-color</span>: <span class="c-value">#5c6bc0</span>;
+}
+<span class="c-sel">.boton:hover</span>   { <span class="c-prop">background-color</span>: <span class="c-value">#7986cb</span>; }
+<span class="c-sel">.boton:active</span>  { <span class="c-prop">background-color</span>: <span class="c-value">#3949ab</span>; }
+<span class="c-sel">.boton:focus</span>   { <span class="c-prop">outline</span>: <span class="c-unit">2px</span> <span class="c-value">solid</span> <span class="c-value">#90caf9</span>; }
+
+<span class="c-sel">a:visited</span> { <span class="c-prop">color</span>: <span class="c-value">purple</span>; }  <span class="c-comment">/* convención: morado */</span></pre></div>
+    </div>
+  </div>
+
+  <!-- transform y transition -->
+  <div class="topic-block" id="t13">
+    <div class="topic-header" onclick="toggleBlock('t13')">
+      <div class="topic-icon" style="background:rgba(255,181,71,0.12);">🎬</div>
+      <div class="topic-header-text">
+        <div class="topic-title">transform & transition</div>
+        <div class="topic-subtitle">transformar y animar suavemente</div>
+      </div>
+      <span class="topic-chevron">▼</span>
+    </div>
+    <div class="topic-body">
+      <p><strong>transform</strong> aplica transformaciones visuales al elemento: rotar, escalar, mover, sesgar. Se pueden concatenar múltiples funciones separadas por espacio.</p>
+      <p><strong>transition</strong> suaviza los cambios entre estados. Se coloca en el estado base (no en el :hover). Necesita un disparador para ejecutarse.</p>
+
+      <p style="margin-top:14px; margin-bottom:4px; font-size:13px; color:var(--text3);">Pasa el cursor sobre cada caja para ver el efecto:</p>
+      <div class="transform-demos">
+        <div class="transform-box"><div class="shape shape-rotate"></div><div class="t-label">rotate(45deg)</div></div>
+        <div class="transform-box"><div class="shape shape-scale"></div><div class="t-label">scale(1.4)</div></div>
+        <div class="transform-box"><div class="shape shape-trans"></div><div class="t-label">translateX(12px)</div></div>
+        <div class="transform-box"><div class="shape shape-circle" style="border-radius:50%;"></div><div class="t-label">border-radius:50%</div></div>
+      </div>
+
+      <div class="code-block" style="margin-top:14px;"><pre><span class="c-comment">/* transform: concatenar funciones con espacio */</span>
+<span class="c-sel">.elemento</span> {
+  <span class="c-prop">transform</span>: <span class="c-fn">rotate</span>(<span class="c-unit">45deg</span>) <span class="c-fn">scale</span>(<span class="c-value">2</span>);
+}
+
+<span class="c-comment">/* transition: propiedad  duración  curva */</span>
+<span class="c-sel">.boton</span> {
+  <span class="c-prop">background-color</span>: <span class="c-value">blue</span>;
+  <span class="c-prop">transition</span>: <span class="c-prop">background-color</span> <span class="c-unit">0.5s</span> <span class="c-value">ease</span>;
+}
+<span class="c-sel">.boton:hover</span> {
+  <span class="c-prop">background-color</span>: <span class="c-value">red</span>;  <span class="c-comment">/* se anima con 0.5s de duración */</span>
+}
+
+<span class="c-comment">/* SIN transition → cambio instantáneo (brusco) */</span>
+<span class="c-comment">/* CON transition → cambio fluido y suave */</span>
+
+<span class="c-comment">/* Importante: transform sin :hover no se activa solo */</span>
+<span class="c-sel">.boton</span>       { <span class="c-prop">transform</span>: <span class="c-fn">scale</span>(<span class="c-value">1</span>); <span class="c-prop">transition</span>: <span class="c-prop">transform</span> <span class="c-unit">0.3s</span>; }
+<span class="c-sel">.boton:hover</span> { <span class="c-prop">transform</span>: <span class="c-fn">scale</span>(<span class="c-value">1.1</span>); } <span class="c-comment">/* :hover dispara la transformación */</span></pre></div>
+      <div class="trap"><div class="tip-icon">⚠️</div><p>Si defines <code>transform: scale(1.1)</code> en el estado base <em>sin</em> un disparador como <code>:hover</code>, el elemento simplemente estará escalado permanentemente pero no se verá ninguna animación al interactuar.</p></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ SEPARADOR ENTRE SECCIONES ═══════════ -->
+  <div style="margin: 60px 0 0; position:relative;">
+    <div style="height:1px; background: linear-gradient(to right, transparent, var(--border2), transparent);"></div>
+    <div style="text-align:center; margin-top:-14px;">
+      <span style="background:var(--bg); padding:0 16px; font-size:12px; color:var(--text3); letter-spacing:.08em; text-transform:uppercase;">Guía de Estudio Interactiva</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       GUÍA DE ESTUDIO
+  ════════════════════════════════════════════ -->
+  <div class="guide-header">
+    <div class="header-eyebrow" style="display:inline-flex;">📋 Guía de Estudio</div>
+    <h2 style="font-family:var(--font-display); color:var(--text); margin-top:12px;">Tu hoja de ruta para <em>el cuestionario</em></h2>
+    <p>Resumen ejecutivo, glosario completo y 10 preguntas de autoevaluación con respuestas justificadas.</p>
+  </div>
+
+  <div class="guide-nav">
+    <button class="active" onclick="showGuide('g-resumen', this)">📋 Resumen</button>
+    <button onclick="showGuide('g-glosario', this)">📖 Glosario</button>
+    <button onclick="showGuide('g-secciones', this)">🗂 Por secciones</button>
+    <button onclick="showGuide('g-quiz', this)">✏️ Autoevaluación</button>
+  </div>
+
+  <!-- ── RESUMEN EJECUTIVO ── -->
+  <div id="g-resumen" class="guide-section active">
+    <p style="color:var(--text2); font-size:14px; margin-bottom:20px;">Los 5 conceptos fundamentales que no puedes olvidar para el cuestionario.</p>
+    <div class="exec-grid">
+      <div class="exec-card ec-purple">
+        <div class="exec-num">01</div>
+        <h4>Cada propiedad tiene su función exacta</h4>
+        <p><code>font-family</code> = fuente, <code>font-weight</code> = grosor, <code>font-size</code> = tamaño. Confundirlas es el error más frecuente.</p>
+      </div>
+      <div class="exec-card ec-teal">
+        <div class="exec-num">02</div>
+        <h4>Box Model: margin exterior, padding interior</h4>
+        <p><code>margin</code> = espacio fuera del borde. <code>padding</code> = espacio dentro. Los 4 valores van en sentido horario: top → right → bottom → left.</p>
+      </div>
+      <div class="exec-card ec-coral">
+        <div class="exec-num">03</div>
+        <h4>Flexbox: fila horizontal por defecto</h4>
+        <p><code>justify-content</code> controla el eje horizontal. <code>flex-wrap: wrap</code> permite saltos de línea. <code>gap</code> es mejor que margin para separar items.</p>
+      </div>
+      <div class="exec-card ec-blue">
+        <div class="exec-num">04</div>
+        <h4>Degradados son imágenes, no colores</h4>
+        <p>Usar <code>background-image: linear-gradient()</code>, nunca <code>background-color</code>. Los <code>transform</code> se concatenan con espacio: <code>rotate(45deg) scale(2)</code>.</p>
+      </div>
+      <div class="exec-card ec-amber" style="grid-column:1/-1;">
+        <div class="exec-num">05</div>
+        <h4>Interactividad: pseudoclases + transition</h4>
+        <p><code>:hover</code> detecta el cursor. La <code>transition</code> va en el estado base para suavizar cambios. <code>transform</code> sin disparador como <code>:hover</code> no genera animación visible.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:15px; font-weight:600; margin:28px 0 12px; color:var(--text);">Mapa de categorías del cuestionario</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+      <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:12px 14px; border-top:2px solid var(--accent);">
+        <p style="font-weight:600; font-size:13px; color:var(--text); margin-bottom:4px;">🔤 Tipografía </p>
+        <p style="font-size:12px; color:var(--text2); line-height:1.5; margin:0;">font-family, font-weight, font-size, text-decoration, letter-spacing, @import</p>
+      </div>
+      <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:12px 14px; border-top:2px solid var(--teal);">
+        <p style="font-weight:600; font-size:13px; color:var(--text); margin-bottom:4px;">🎨 Color y Fondo </p>
+        <p style="font-size:12px; color:var(--text2); line-height:1.5; margin:0;">color, background-color, linear-gradient, hexadecimal</p>
+      </div>
+      <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:12px 14px; border-top:2px solid var(--coral);">
+        <p style="font-weight:600; font-size:13px; color:var(--text); margin-bottom:4px;">📦 Modelo de Caja </p>
+        <p style="font-size:12px; color:var(--text2); line-height:1.5; margin:0;">margin, padding, border, border-radius, box-shadow, max-width</p>
+      </div>
+      <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:12px 14px; border-top:2px solid #79b8ff;">
+        <p style="font-weight:600; font-size:13px; color:var(--text); margin-bottom:4px;">⚙️ Display / Flexbox </p>
+        <p style="font-size:12px; color:var(--text2); line-height:1.5; margin:0;">display:flex, justify-content, flex-wrap, gap</p>
+      </div>
+      <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:12px 14px; border-top:2px solid var(--amber); grid-column:1/-1;">
+        <p style="font-weight:600; font-size:13px; color:var(--text); margin-bottom:4px;">✨ Interactividad </p>
+        <p style="font-size:12px; color:var(--text2); line-height:1.5; margin:0;">:hover, :visited, :active, :focus, transform, transition</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── GLOSARIO ── -->
+  <div id="g-glosario" class="guide-section">
+    <p style="color:var(--text2); font-size:14px; margin-bottom:14px;">Filtra por categoría para estudiar tema por tema.</p>
+    <div class="glosario-filter">
+      <button class="gf-btn active" onclick="filterGlos('all', this)">Todos</button>
+      <button class="gf-btn" onclick="filterGlos('tipo', this)">🔤 Tipografía</button>
+      <button class="gf-btn" onclick="filterGlos('color', this)">🎨 Color</button>
+      <button class="gf-btn" onclick="filterGlos('box', this)">📦 Caja</button>
+      <button class="gf-btn" onclick="filterGlos('flex', this)">⚙️ Flexbox</button>
+      <button class="gf-btn" onclick="filterGlos('inter', this)">✨ Interac.</button>
+    </div>
+    <div class="glos-grid" id="glos-grid">
+      <div class="glos-card" data-cat="tipo"><div class="glos-term">font-family</div><div class="glos-def">Define la familia tipográfica. Nombres con espacios van entre comillas. Incluir fuente genérica de respaldo.</div></div>
+      <div class="glos-card" data-cat="tipo"><div class="glos-term">font-weight</div><div class="glos-def">Grosor del texto. 400 = normal, 700 = bold. También acepta palabras clave: bold, light, normal.</div></div>
+      <div class="glos-card" data-cat="tipo"><div class="glos-term">font-size</div><div class="glos-def">Tamaño de fuente. Siempre requiere unidad: px, rem, em. Sin unidad es inválido.</div></div>
+      <div class="glos-card" data-cat="tipo"><div class="glos-term">text-decoration</div><div class="glos-def">Adornos de texto: underline, line-through, none (elimina subrayado de enlaces).</div></div>
+      <div class="glos-card" data-cat="tipo"><div class="glos-term">text-align</div><div class="glos-def">Alineación horizontal del texto: left, center, right, justify.</div></div>
+      <div class="glos-card" data-cat="tipo"><div class="glos-term">letter-spacing</div><div class="glos-def">Espacio entre caracteres individuales. No confundir con word-spacing (palabras).</div></div>
+      <div class="glos-card" data-cat="tipo"><div class="glos-term">@import url()</div><div class="glos-def">Regla CSS para importar recursos externos como Google Fonts. Va al inicio del archivo.</div></div>
+      <div class="glos-card" data-cat="color"><div class="glos-term">color</div><div class="glos-def">Color del texto (primer plano). No confundir con background-color.</div></div>
+      <div class="glos-card" data-cat="color"><div class="glos-term">background-color</div><div class="glos-def">Pinta el área de fondo del elemento según su modelo de caja.</div></div>
+      <div class="glos-card" data-cat="color"><div class="glos-term">linear-gradient()</div><div class="glos-def">Crea degradados. Se usa con background-image, NUNCA con background-color. Es una imagen CSS.</div></div>
+      <div class="glos-card" data-cat="color"><div class="glos-term">Hexadecimal</div><div class="glos-def">Formato de color que empieza con # seguido de 6 caracteres (o 3 en abreviado). Ej: #FF5733.</div></div>
+      <div class="glos-card" data-cat="box"><div class="glos-term">margin</div><div class="glos-def">Espacio EXTERIOR al borde. Separa el elemento de sus vecinos. 4 valores: top right bottom left.</div></div>
+      <div class="glos-card" data-cat="box"><div class="glos-term">padding</div><div class="glos-def">Espacio INTERIOR entre el contenido y el borde del elemento.</div></div>
+      <div class="glos-card" data-cat="box"><div class="glos-term">border</div><div class="glos-def">Shorthand: grosor estilo color. Ej: border: 2px solid red;</div></div>
+      <div class="glos-card" data-cat="box"><div class="glos-term">border-radius</div><div class="glos-def">Redondea esquinas. Con 50% en elemento cuadrado = círculo perfecto.</div></div>
+      <div class="glos-card" data-cat="box"><div class="glos-term">box-shadow</div><div class="glos-def">Sombra de elemento. Sintaxis: offset-x offset-y BLUR spread color. 3er valor = desenfoque.</div></div>
+      <div class="glos-card" data-cat="box"><div class="glos-term">max-width</div><div class="glos-def">Límite máximo de ancho. Ideal para imágenes responsivas: max-width: 100%.</div></div>
+      <div class="glos-card" data-cat="flex"><div class="glos-term">display: flex</div><div class="glos-def">Convierte al padre en contenedor flex. Hijos directos se organizan en fila horizontal por defecto.</div></div>
+      <div class="glos-card" data-cat="flex"><div class="glos-term">justify-content</div><div class="glos-def">Alinea en el eje principal (horizontal). center, space-between, space-around, space-evenly.</div></div>
+      <div class="glos-card" data-cat="flex"><div class="glos-term">flex-wrap: wrap</div><div class="glos-def">Permite salto a nueva línea cuando no hay espacio. Por defecto: nowrap (todo en una fila).</div></div>
+      <div class="glos-card" data-cat="flex"><div class="glos-term">gap</div><div class="glos-def">Espacio solo entre elementos hijos. Ventaja: no afecta los bordes exteriores del contenedor.</div></div>
+      <div class="glos-card" data-cat="inter"><div class="glos-term">:hover</div><div class="glos-def">Pseudoclase activa cuando el cursor está sobre el elemento. La más usada para interacciones.</div></div>
+      <div class="glos-card" data-cat="inter"><div class="glos-term">:visited</div><div class="glos-def">Aplica estilo a enlaces ya visitados en el historial del navegador.</div></div>
+      <div class="glos-card" data-cat="inter"><div class="glos-term">transform</div><div class="glos-def">Transformaciones visuales: rotate(), scale(), translate(). Se concatenan con espacio.</div></div>
+      <div class="glos-card" data-cat="inter"><div class="glos-term">transition</div><div class="glos-def">Suaviza cambios entre estados. Va en el estado BASE. Sintaxis: propiedad duración curva.</div></div>
+    </div>
+  </div>
+
+  <!-- ── POR SECCIONES ── -->
+  <div id="g-secciones" class="guide-section">
+    <p style="color:var(--text2); font-size:14px; margin-bottom:20px;">Desglose temático con los puntos clave, explicaciones simplificadas y trampas del examen.</p>
+
+    <div style="border-left:2px solid var(--accent); padding-left:16px; margin-bottom:20px;">
+      <h3 style="color:var(--accent2); font-size:14px; font-weight:600; margin-bottom:10px;">🔤 Tipografía </h3>
+      <ul style="list-style:none; padding:0;">
+        <li style="color:var(--text2); font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">✦ <strong style="color:var(--text);">Google Fonts:</strong> importar con @import url(), aplicar con font-family: 'Roboto', sans-serif;</li>
+        <li style="color:var(--text2); font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">✦ <strong style="color:var(--text);">Negrita:</strong> font-weight: bold o font-weight: 700 son equivalentes.</li>
+        <li style="color:var(--text2); font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">✦ <strong style="color:var(--text);">Subrayado:</strong> text-decoration: underline lo añade, none lo elimina.</li>
+        <li style="color:var(--text2); font-size:13px; padding:5px 0;">✦ <strong style="color:var(--coral);">Trampa:</strong> font-style es para cursiva (italic), NO para negrita.</li>
+      </ul>
+    </div>
+
+    <div style="border-left:2px solid var(--teal); padding-left:16px; margin-bottom:20px;">
+      <h3 style="color:var(--teal); font-size:14px; font-weight:600; margin-bottom:10px;">🎨 Color y Fondo </h3>
+      <ul style="list-style:none; padding:0;">
+        <li style="color:var(--text2); font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">✦ <strong style="color:var(--text);">color</strong> = texto (primer plano). <strong style="color:var(--text);">background-color</strong> = fondo del elemento.</li>
+        <li style="color:var(--text2); font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">✦ Los degradados son <strong style="color:var(--text);">imágenes CSS</strong> → usar background-image: linear-gradient()</li>
+        <li style="color:var(--text2); font-size:13px; padding:5px 0;">✦ <strong style="color:var(--coral);">Trampa:</strong> background-color: linear-gradient() no funciona.</li>
+      </ul>
+    </div>
+
+    <div style="border-left:2px solid var(--coral); padding-left:16px; margin-bottom:20px;">
+      <h3 style="color:var(--coral); font-size:14px; font-weight:600; margin-bottom:10px;">📦 Modelo de Caja </h3>
+      <ul style="list-style:none; padding:0;">
+        <li style="color:var(--text2); font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">✦ <strong style="color:var(--text);">margin</strong> = exterior (entre elementos), <strong style="color:var(--text);">padding</strong> = interior (entre contenido y borde).</li>
+        <li style="color:var(--text2); font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">✦ Orden de 4 valores: top → right → bottom → left (TRouBLe).</li>
+        <li style="color:var(--text2); font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">✦ En box-shadow, el <strong style="color:var(--text);">3er valor</strong> es el blur (desenfoque).</li>
+        <li style="color:var(--text2); font-size:13px; padding:5px 0;">✦ border-radius: 50% en elemento cuadrado = círculo perfecto.</li>
+      </ul>
+    </div>
+
+    <div style="border-left:2px solid #79b8ff; padding-left:16px; margin-bottom:20px;">
+      <h3 style="color:#79b8ff; font-size:14px; font-weight:600; margin-bottom:10px;">⚙️ Flexbox </h3>
+      <ul style="list-style:none; padding:0;">
+        <li style="color:var(--text2); font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">✦ display: flex → hijos en <strong style="color:var(--text);">fila horizontal</strong> por defecto (flex-direction: row).</li>
+        <li style="color:var(--text2); font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">✦ <strong style="color:var(--text);">justify-content: space-between</strong> → 1° pegado a la izquierda, último a la derecha.</li>
+        <li style="color:var(--text2); font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">✦ flex-wrap: wrap → permite múltiples filas cuando no hay espacio.</li>
+        <li style="color:var(--text2); font-size:13px; padding:5px 0;">✦ gap vs margin: gap solo actúa entre elementos, sin afectar bordes exteriores.</li>
+      </ul>
+    </div>
+
+    <div style="border-left:2px solid var(--amber); padding-left:16px;">
+      <h3 style="color:var(--amber); font-size:14px; font-weight:600; margin-bottom:10px;">✨ Interactividad</h3>
+      <ul style="list-style:none; padding:0;">
+        <li style="color:var(--text2); font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">✦ <strong style="color:var(--text);">:hover</strong> = cursor encima. :active = clic sostenido. :focus = teclado. :visited = ya visitado.</li>
+        <li style="color:var(--text2); font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">✦ La transition va en el <strong style="color:var(--text);">estado base</strong>, no en :hover. Necesita un disparador para ejecutarse.</li>
+        <li style="color:var(--text2); font-size:13px; padding:5px 0;">✦ <strong style="color:var(--coral);">Trampa:</strong> transform sin :hover no crea animación al interactuar.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── AUTOEVALUACIÓN ── -->
+  <div id="g-quiz" class="guide-section">
+    <div class="score-row">
+      <div class="score-num" id="score-disp">0/5</div>
+      <div style="flex:1;">
+        <div class="score-prog"><div class="score-fill" id="score-fill" style="width:0%"></div></div>
+        <div class="score-label" style="margin-top:6px;">respuestas correctas en opción múltiple</div>
+      </div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="q-block">
+      <div class="q-meta"><span class="pill pill-purple" style="font-size:10px;">Tipografía</span> </div>
+      <div class="q-text">¿Cuál de las siguientes reglas aplica correctamente una fuente de Google Fonts con fuente de respaldo?</div>
+      <div class="q-opts">
+        <button class="q-opt" onclick="ans(this,'q1',false)">A) font-style: 'Roboto', sans-serif;</button>
+        <button class="q-opt" onclick="ans(this,'q1',true)">B) font-family: 'Roboto', sans-serif;</button>
+        <button class="q-opt" onclick="ans(this,'q1',false)">C) text-font: Roboto sans-serif;</button>
+        <button class="q-opt" onclick="ans(this,'q1',false)">D) font-type: 'Roboto';</button>
+      </div>
+      <div class="q-exp" id="exp-q1"><strong>Correcto: B.</strong> La propiedad es <code>font-family</code>. Las comillas son buena práctica y la fuente genérica de respaldo (<code>sans-serif</code>) se separa con coma.</div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-block">
+      <div class="q-meta"><span class="pill pill-teal" style="font-size:10px;">Color y Fondo</span> </div>
+      <div class="q-text">¿Por qué los degradados CSS deben usarse con <code>background-image</code> en lugar de <code>background-color</code>?</div>
+      <div class="q-opts">
+        <button class="q-opt" onclick="ans(this,'q2',false)">A) Por compatibilidad con navegadores antiguos.</button>
+        <button class="q-opt" onclick="ans(this,'q2',false)">B) Porque background-color solo acepta colores de 6 caracteres.</button>
+        <button class="q-opt" onclick="ans(this,'q2',true)">C) Porque CSS trata los degradados como imágenes generadas dinámicamente.</button>
+        <button class="q-opt" onclick="ans(this,'q2',false)">D) No hay diferencia, ambas propiedades aceptan degradados.</button>
+      </div>
+      <div class="q-exp" id="exp-q2"><strong>Correcto: C.</strong> <code>linear-gradient()</code> genera una imagen de forma dinámica, por eso se asigna a <code>background-image</code>. <code>background-color</code> solo acepta valores de color plano.</div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-block">
+      <div class="q-meta"><span class="pill pill-coral" style="font-size:10px;">Modelo de Caja</span> </div>
+      <div class="q-text">Dada la regla <code>margin: 10px 20px 30px 40px</code>, ¿cuál es el valor del margen izquierdo?</div>
+      <div class="q-opts">
+        <button class="q-opt" onclick="ans(this,'q3',false)">A) 10px</button>
+        <button class="q-opt" onclick="ans(this,'q3',false)">B) 20px</button>
+        <button class="q-opt" onclick="ans(this,'q3',false)">C) 30px</button>
+        <button class="q-opt" onclick="ans(this,'q3',true)">D) 40px</button>
+      </div>
+      <div class="q-exp" id="exp-q3"><strong>Correcto: D.</strong> El orden de 4 valores sigue el sentido horario: top=10px, right=20px, bottom=30px, <strong>left=40px</strong>. Mnemotécnica: TRouBLe.</div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-block">
+      <div class="q-meta"><span class="pill pill-blue" style="font-size:10px;">Flexbox</span> </div>
+      <div class="q-text">¿Cuál es la ventaja principal de usar <code>gap</code> en un contenedor flex en lugar de <code>margin</code> en los elementos hijos?</div>
+      <div class="q-opts">
+        <button class="q-opt" onclick="ans(this,'q4',false)">A) gap aplica animaciones automáticas entre elementos.</button>
+        <button class="q-opt" onclick="ans(this,'q4',true)">B) gap inserta espacio solo entre los elementos, evitando márgenes en bordes exteriores.</button>
+        <button class="q-opt" onclick="ans(this,'q4',false)">C) gap hace que todos los elementos tengan el mismo ancho.</button>
+        <button class="q-opt" onclick="ans(this,'q4',false)">D) gap es un sinónimo de margin y funcionan igual.</button>
+      </div>
+      <div class="q-exp" id="exp-q4"><strong>Correcto: B.</strong> <code>gap</code> actúa como "canaleta" entre elementos. El <code>margin</code> afecta los 4 lados, generando espacios no deseados en los bordes exteriores del contenedor.</div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q-block">
+      <div class="q-meta"><span class="pill pill-amber" style="font-size:10px;">Interactividad</span></div>
+      <div class="q-text">¿Cuál es la sintaxis correcta para rotar un elemento 90 grados y escalarlo al 150% simultáneamente?</div>
+      <div class="q-opts">
+        <button class="q-opt" onclick="ans(this,'q5',false)">A) transform: rotate(90); scale(1.5);</button>
+        <button class="q-opt" onclick="ans(this,'q5',true)">B) transform: rotate(90deg) scale(1.5);</button>
+        <button class="q-opt" onclick="ans(this,'q5',false)">C) transition: rotate(90deg) scale(1.5);</button>
+        <button class="q-opt" onclick="ans(this,'q5',false)">D) animation: rotate(90deg); transform: scale(1.5);</button>
+      </div>
+      <div class="q-exp" id="exp-q5"><strong>Correcto: B.</strong> La propiedad <code>transform</code> acepta múltiples funciones separadas por espacio. Las unidades <code>deg</code> son obligatorias en <code>rotate()</code>.</div>
+    </div>
+
+    <!-- Q6 desarrollo -->
+    <div class="q-block">
+      <div class="q-meta"><span class="pill pill-purple" style="font-size:10px;">Tipografía</span>  — Desarrollo</div>
+      <div class="q-text">Explica la diferencia entre <code>letter-spacing</code> y <code>word-spacing</code>. Da un ejemplo de cuándo usarías cada una.</div>
+      <div class="q-open"><textarea placeholder="Escribe tu respuesta aquí..."></textarea></div>
+      <button class="reveal-btn" onclick="revealQ('exp-q6')">Ver respuesta modelo ↓</button>
+      <div class="q-exp" id="exp-q6"><strong>Respuesta modelo:</strong> <code>letter-spacing</code> controla el espacio entre cada carácter individual (útil en títulos para mayor elegancia o en texto con mayúsculas). <code>word-spacing</code> controla el espacio entre palabras completas, sin afectar letras dentro de una misma palabra. Ejemplo: un título de marca puede usar <code>letter-spacing: 3px</code> para un efecto espaciado elegante; un texto con palabras muy juntas puede usar <code>word-spacing: 6px</code> para mejorar la legibilidad.</div>
+    </div>
+
+    <!-- Q7 desarrollo -->
+    <div class="q-block">
+      <div class="q-meta"><span class="pill pill-coral" style="font-size:10px;">Modelo de Caja</span>  — Desarrollo</div>
+      <div class="q-text">¿Por qué es mejor práctica usar <code>max-width: 100%</code> en imágenes en lugar de <code>width: 100%</code>? ¿Qué problema específico soluciona?</div>
+      <div class="q-open"><textarea placeholder="Escribe tu respuesta aquí..."></textarea></div>
+      <button class="reveal-btn" onclick="revealQ('exp-q7')">Ver respuesta modelo ↓</button>
+      <div class="q-exp" id="exp-q7"><strong>Respuesta modelo:</strong> <code>width: 100%</code> fuerza a la imagen a ocupar siempre el 100% del contenedor, incluso si este es más grande que la imagen original, provocando pixelación y pérdida de calidad. <code>max-width: 100%</code> establece un límite máximo igual al contenedor, pero si el contenedor es más grande, la imagen conserva su tamaño natural sin distorsionarse. Si el contenedor es más pequeño, la imagen sí se reduce fluidamente, logrando un comportamiento responsivo ideal.</div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="q-block">
+      <div class="q-meta"><span class="pill pill-blue" style="font-size:10px;">Flexbox</span> </div>
+      <div class="q-text">Al aplicar <code>display: flex</code> a un contenedor, ¿cómo se organizan sus hijos directos por defecto?</div>
+      <div class="q-opts">
+        <button class="q-opt" onclick="ans(this,'q8',false)">A) Se apilan verticalmente en una columna.</button>
+        <button class="q-opt" onclick="ans(this,'q8',true)">B) Se organizan en fila horizontal, alineados al inicio.</button>
+        <button class="q-opt" onclick="ans(this,'q8',false)">C) Desaparecen hasta recibir un ancho fijo.</button>
+        <button class="q-opt" onclick="ans(this,'q8',false)">D) Flotan en la esquina superior izquierda.</button>
+      </div>
+      <div class="q-exp" id="exp-q8"><strong>Correcto: B.</strong> Flexbox establece <code>flex-direction: row</code> por defecto, organizando a los hijos en fila horizontal desde el inicio (izquierda).</div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="q-block">
+      <div class="q-meta"><span class="pill pill-amber" style="font-size:10px;">Interactividad</span></div>
+      <div class="q-text">Para que un botón cambie su color de fondo de forma <strong>fluida</strong> al hacer hover, ¿qué combinación es correcta?</div>
+      <div class="q-opts">
+        <button class="q-opt" onclick="ans(this,'q9',false)">A) Solo :hover { background-color: blue; }</button>
+        <button class="q-opt" onclick="ans(this,'q9',false)">B) Solo transition: background-color 0.3s; en el estado base.</button>
+        <button class="q-opt" onclick="ans(this,'q9',true)">C) transition en el estado base + background-color diferente en :hover.</button>
+        <button class="q-opt" onclick="ans(this,'q9',false)">D) animation: bg-change 0.3s; en :hover.</button>
+      </div>
+      <div class="q-exp" id="exp-q9"><strong>Correcto: C.</strong> Se necesitan ambas partes: la <code>transition</code> en el estado base (define qué animar y cuánto dura) + el <code>:hover</code> con el valor de destino. Sin transition, el cambio es instantáneo y brusco.</div>
+    </div>
+
+    <!-- Q10 desarrollo -->
+    <div class="q-block">
+      <div class="q-meta"><span class="pill pill-purple" style="font-size:10px;">Integración</span>— Desarrollo</div>
+      <div class="q-text">Escribe el CSS completo para un botón con: esquinas redondeadas de 8px, sombra al hacer hover, y transición fluida de 0.3 segundos.</div>
+      <div class="q-open"><textarea placeholder="Escribe el CSS aquí..." style="min-height:100px;"></textarea></div>
+      <button class="reveal-btn" onclick="revealQ('exp-q10')">Ver respuesta modelo ↓</button>
+      <div class="q-exp" id="exp-q10"><strong>Respuesta modelo:</strong><br><br>
+<code>.boton {<br>
+&nbsp;&nbsp;border-radius: 8px;<br>
+&nbsp;&nbsp;box-shadow: none;<br>
+&nbsp;&nbsp;transition: box-shadow 0.3s ease;<br>
+}<br>
+.boton:hover {<br>
+&nbsp;&nbsp;box-shadow: 0px 4px 12px rgba(0,0,0,0.3);<br>
+}</code><br><br>
+Puntos clave: <code>border-radius</code> para redondear, la <code>transition</code> va en el estado base, y <code>box-shadow</code> en el <code>:hover</code> para que aparezca al pasar el cursor.</div>
+    </div>
+
+  </div><!-- /quiz -->
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <p>Fundamentos de CSS — Material de Estudio &nbsp;·&nbsp; Diseño Web Front-End</p>
+</footer>
+
+<script>
+// ── Apuntes: toggle accordion ──
+function toggleBlock(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+// ── Guía: switch tab ──
+function showGuide(id, btn) {
+  document.querySelectorAll('.guide-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.guide-nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── Glosario: filter ──
+function filterGlos(cat, btn) {
+  document.querySelectorAll('.gf-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.glos-card').forEach(c => {
+    c.classList.toggle('hidden', cat !== 'all' && c.dataset.cat !== cat);
+  });
+}
+
+// ── Quiz: respuestas ──
+const scores = {};
+let correct = 0;
+
+function ans(el, qid, isCorrect) {
+  if (scores[qid] !== undefined) return;
+  scores[qid] = isCorrect ? 1 : 0;
+  if (isCorrect) correct++;
+
+  const opts = el.closest('.q-opts').querySelectorAll('.q-opt');
+  opts.forEach(o => { o.classList.add('disabled'); o.onclick = null; });
+  el.classList.add(isCorrect ? 'correct' : 'wrong');
+
+  document.getElementById('exp-' + qid).classList.add('show');
+  updateScore();
+}
+
+function revealQ(id) {
+  document.getElementById(id).classList.add('show');
+}
+
+function updateScore() {
+  const answered = Object.keys(scores).length;
+  document.getElementById('score-disp').textContent = correct + '/5';
+  document.getElementById('score-fill').style.width = (correct / 5 * 100) + '%';
+}
+</script>
+</body>
+</html>
